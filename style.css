@@ -1,0 +1,306 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b0b16;
+    color: white;
+    min-height: 100vh;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    padding: 30px 7%;
+    text-align: center;
+    border-bottom: 1px solid #292943;
+    background: #0b0b16;
+}
+
+.brand {
+    text-align: center;
+}
+
+.logo {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 5px;
+}
+
+.creator-name {
+    margin-top: 10px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #cdb8ff;
+}
+
+nav {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav a {
+    color: #c7c7d8;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+nav a:hover {
+    color: white;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    text-align: center;
+    padding: 90px 20px 70px;
+}
+
+.small-title {
+    font-size: 13px;
+    letter-spacing: 5px;
+    color: #aaaac0;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 58px;
+    line-height: 1.1;
+}
+
+h1 span {
+    color: #cdb8ff;
+}
+
+.description {
+    max-width: 650px;
+    margin: 25px auto;
+    color: #aaaabd;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+/* =========================
+   GENERATOR
+========================= */
+
+.generator-box {
+    max-width: 750px;
+    margin: 40px auto;
+    display: flex;
+    gap: 12px;
+}
+
+#textInput {
+    flex: 1;
+    padding: 18px 20px;
+    border-radius: 12px;
+    border: 1px solid #393951;
+    background: #151526;
+    color: white;
+    font-size: 17px;
+    outline: none;
+}
+
+#textInput:focus {
+    border-color: #a98ce8;
+}
+
+#generateBtn {
+    padding: 18px 25px;
+    border: none;
+    border-radius: 12px;
+    background: #9472d6;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#generateBtn:hover {
+    transform: translateY(-2px);
+}
+
+/* =========================
+   STYLES
+========================= */
+
+.styles-section,
+.symbols-section {
+    max-width: 1000px;
+    margin: auto;
+    padding: 70px 20px;
+}
+
+h2 {
+    text-align: center;
+    font-size: 35px;
+}
+
+.section-description {
+    text-align: center;
+    color: #9999b0;
+    margin: 12px 0 35px;
+}
+
+#results {
+    display: grid;
+    gap: 15px;
+}
+
+.empty-message {
+    text-align: center;
+    padding: 35px;
+    border: 1px dashed #3d3d58;
+    border-radius: 15px;
+    color: #9999b0;
+}
+
+/* Result cards */
+
+.result-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    background: #151526;
+    border: 1px solid #2c2c45;
+    border-radius: 15px;
+}
+
+.result-card small {
+    color: #8e8ea5;
+}
+
+.result-text {
+    margin-top: 8px;
+    font-size: 23px;
+    word-break: break-word;
+}
+
+.copy-btn {
+    padding: 11px 20px;
+    border: none;
+    border-radius: 9px;
+    background: #292940;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.copy-btn:hover {
+    background: #3b3b59;
+}
+
+/* =========================
+   SYMBOLS
+========================= */
+
+.symbols-box {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 12px;
+}
+
+.symbols-box span {
+    min-height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #151526;
+    border: 1px solid #2c2c45;
+    border-radius: 13px;
+    font-size: 27px;
+    cursor: pointer;
+}
+
+.symbols-box span:hover {
+    transform: scale(1.06);
+    border-color: #9472d6;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    text-align: center;
+    padding: 55px 20px;
+    border-top: 1px solid #292943;
+    color: #9999b0;
+}
+
+footer h3 {
+    color: white;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.creator {
+    margin-top: 20px;
+}
+
+.creator strong {
+    color: #cdb8ff;
+}
+
+.copyright {
+    margin-top: 15px;
+    font-size: 13px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .logo {
+        font-size: 32px;
+    }
+
+    .creator-name {
+        font-size: 16px;
+        letter-spacing: 1px;
+    }
+
+    nav {
+        gap: 15px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .generator-box {
+        flex-direction: column;
+    }
+
+    #generateBtn {
+        width: 100%;
+    }
+
+    .result-card {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .copy-btn {
+        width: 100%;
+    }
+}
