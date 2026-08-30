@@ -33,11 +33,9 @@
     <header>
 
         <div class="brand">
-
             <div class="logo">
                 ✦ FONTIFY ✦
             </div>
-
         </div>
 
         <nav>
@@ -72,8 +70,10 @@
             </p>
 
 
-            <!-- GENERATOR -->
+            <!-- TEXT GENERATOR -->
             <div class="generator-box">
+
+                <h2>✦ Enter Your Text ✦</h2>
 
                 <input
                     type="text"
@@ -92,10 +92,10 @@
         </section>
 
 
-        <!-- FONTS SECTION -->
+        <!-- STYLISH TEXT -->
         <section id="fonts" class="styles-section">
 
-            <h2>✨ Stylish Text</h2>
+            <h2>⟡ Your Stylish Text ⟡</h2>
 
             <p class="section-description">
                 Choose your favorite style and copy it instantly.
@@ -112,13 +112,13 @@
         </section>
 
 
-        <!-- SYMBOLS SECTION -->
+        <!-- SYMBOLS -->
         <section id="symbols" class="symbols-section">
 
-            <h2>♡ Beautiful Symbols</h2>
+            <h2>Symbols..♥</h2>
 
             <p class="section-description">
-                Copy beautiful symbols for names, bios and messages.
+                Click any symbol to copy it.
             </p>
 
             <div class="symbols-box">
@@ -201,6 +201,22 @@
 
     <!-- JAVASCRIPT -->
     <script src="script.js"></script>
+
+    <!-- SYMBOL COPY -->
+    <script>
+        document.querySelectorAll('.symbols-box span').forEach(function (symbol) {
+            symbol.addEventListener('click', function () {
+                navigator.clipboard.writeText(this.textContent);
+
+                const oldText = this.textContent;
+                this.textContent = '✓';
+
+                setTimeout(() => {
+                    this.textContent = oldText;
+                }, 700);
+            });
+        });
+    </script>
 
 </body>
 
