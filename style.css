@@ -28,10 +28,29 @@ header {
 }
 
 .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
     font-size: 42px;
     font-weight: 800;
     letter-spacing: 6px;
 }
+
+.logo::before,
+.logo::after {
+    content: "";
+    width: 70px;
+    height: 1px;
+    background: #3b3b57;
+}
+
+
+/* =========================
+   NAVIGATION
+========================= */
 
 nav {
     margin-top: 25px;
@@ -325,6 +344,12 @@ footer h3 {
     .logo {
         font-size: 31px;
         letter-spacing: 4px;
+        gap: 9px;
+    }
+
+    .logo::before,
+    .logo::after {
+        width: 45px;
     }
 
     nav {
