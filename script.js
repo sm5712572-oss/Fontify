@@ -2,9 +2,9 @@ const textInput = document.getElementById("textInput");
 const generateBtn = document.getElementById("generateBtn");
 const results = document.getElementById("results");
 
-// ================================
-// FONT STYLES
-// ================================
+// =====================================
+// BASIC FONT MAPS
+// =====================================
 
 const fonts = [
 
@@ -27,11 +27,92 @@ const fonts = [
     },
 
     {
+        name: "Bold Italic",
+        map: {
+            a:"𝒂",b:"𝒃",c:"𝒄",d:"𝒅",e:"𝒆",f:"𝒇",g:"𝒈",h:"𝒉",i:"𝒊",
+            j:"𝒋",k:"𝒌",l:"𝒍",m:"𝒎",n:"𝒏",o:"𝒐",p:"𝒑",q:"𝒒",r:"𝒓",
+            s:"𝒔",t:"𝒕",u:"𝒖",v:"𝒗",w:"𝒘",x:"𝒙",y:"𝒚",z:"𝒛"
+        }
+    },
+
+    {
+        name: "Script",
+        map: {
+            a:"𝒶",b:"𝒷",c:"𝒸",d:"𝒹",e:"ℯ",f:"𝒻",g:"ℊ",h:"𝒽",i:"𝒾",
+            j:"𝒿",k:"𝓀",l:"𝓁",m:"𝓂",n:"𝓃",o:"ℴ",p:"𝓅",q:"𝓆",r:"𝓇",
+            s:"𝓈",t:"𝓉",u:"𝓊",v:"𝓋",w:"𝓌",x:"𝓍",y:"𝓎",z:"𝓏"
+        }
+    },
+
+    {
+        name: "Bold Script",
+        map: {
+            a:"𝓪",b:"𝓫",c:"𝓬",d:"𝓭",e:"𝓮",f:"𝓯",g:"𝓰",h:"𝓱",i:"𝓲",
+            j:"𝓳",k:"𝓴",l:"𝓵",m:"𝓶",n:"𝓷",o:"𝓸",p:"𝓹",q:"𝓺",r:"𝓻",
+            s:"𝓼",t:"𝓽",u:"𝓾",v:"𝓿",w:"𝔀",x:"𝔁",y:"𝔂",z:"𝔃"
+        }
+    },
+
+    {
+        name: "Gothic",
+        map: {
+            a:"𝔞",b:"𝔟",c:"𝔠",d:"𝔡",e:"𝔢",f:"𝔣",g:"𝔤",h:"𝔥",i:"𝔦",
+            j:"𝔧",k:"𝔨",l:"𝔩",m:"𝔪",n:"𝔫",o:"𝔬",p:"𝔭",q:"𝔮",r:"𝔯",
+            s:"𝔰",t:"𝔱",u:"𝔲",v:"𝔳",w:"𝔴",x:"𝔵",y:"𝔶",z:"𝔷"
+        }
+    },
+
+    {
+        name: "Bold Gothic",
+        map: {
+            a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",
+            j:"𝖏",k:"𝖐",l:"𝖑",m:"𝖒",n:"𝖓",o:"𝖔",p:"𝖕",q:"𝖖",r:"𝖗",
+            s:"𝖘",t:"𝖙",u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟"
+        }
+    },
+
+    {
         name: "Double",
         map: {
             a:"𝕒",b:"𝕓",c:"𝕔",d:"𝕕",e:"𝕖",f:"𝕗",g:"𝕘",h:"𝕙",i:"𝕚",
             j:"𝕛",k:"𝕜",l:"𝕝",m:"𝕞",n:"𝕟",o:"𝕠",p:"𝕡",q:"𝕢",r:"𝕣",
             s:"𝕤",t:"𝕥",u:"𝕦",v:"𝕧",w:"𝕨",x:"𝕩",y:"𝕪",z:"𝕫"
+        }
+    },
+
+    {
+        name: "Sans",
+        map: {
+            a:"𝖺",b:"𝖻",c:"𝖼",d:"𝖽",e:"𝖾",f:"𝖿",g:"𝗀",h:"𝗁",i:"𝗂",
+            j:"𝗃",k:"𝗄",l:"𝗅",m:"𝗆",n:"𝗇",o:"𝗈",p:"𝗉",q:"𝗊",r:"𝗋",
+            s:"𝗌",t:"𝗍",u:"𝗎",v:"𝗏",w:"𝗐",x:"𝗑",y:"𝗒",z:"𝗓"
+        }
+    },
+
+    {
+        name: "Bold Sans",
+        map: {
+            a:"𝗮",b:"𝗯",c:"𝗰",d:"𝗱",e:"𝗲",f:"𝗳",g:"𝗴",h:"𝗵",i:"𝗶",
+            j:"𝗷",k:"𝗸",l:"𝗹",m:"𝗺",n:"𝗻",o:"𝗼",p:"𝗽",q:"𝗾",r:"𝗿",
+            s:"𝘀",t:"𝘁",u:"𝘂",v:"𝘃",w:"𝘄",x:"𝘅",y:"𝘆",z:"𝘇"
+        }
+    },
+
+    {
+        name: "Italic Sans",
+        map: {
+            a:"𝘢",b:"𝘣",c:"𝘤",d:"𝘥",e:"𝘦",f:"𝘧",g:"𝘨",h:"𝘩",i:"𝘪",
+            j:"𝘫",k:"𝘬",l:"𝘭",m:"𝘮",n:"𝘯",o:"𝘰",p:"𝘱",q:"𝘲",r:"𝘳",
+            s:"𝘴",t:"𝘵",u:"𝘶",v:"𝘷",w:"𝘸",x:"𝘹",y:"𝘺",z:"𝘻"
+        }
+    },
+
+    {
+        name: "Bold Italic Sans",
+        map: {
+            a:"𝙖",b:"𝙗",c:"𝙘",d:"𝙙",e:"𝙚",f:"𝙛",g:"𝙜",h:"𝙝",i:"𝙞",
+            j:"𝙟",k:"𝙠",l:"𝙡",m:"𝙢",n:"𝙣",o:"𝙤",p:"𝙥",q:"𝙦",r:"𝙧",
+            s:"𝙨",t:"𝙩",u:"𝙪",v:"𝙫",w:"𝙬",x:"𝙭",y:"𝙮",z:"𝙯"
         }
     },
 
@@ -64,112 +145,191 @@ const fonts = [
 ];
 
 
-// ================================
-// DECORATIONS
-// ================================
+// =====================================
+// DECORATIONS — 100 DIFFERENT
+// =====================================
 
 const decorations = [
 
-    ["꧁༺", "༻꧂"],
-    ["『✦", "✦』"],
-    ["『♡", "♡』"],
-    ["★彡", "彡★"],
-    ["༺", "༻"],
-    ["꧁", "꧂"],
-    ["𓆩♡𓆪 ", " 𓆩♡𓆪"],
-    ["✧･ﾟ: *", "* :･ﾟ✧"],
-    ["╰┈➤ ", " ♡"],
-    ["✦ ", " ✦"],
     ["♡ ", " ♡"],
     ["♥ ", " ♥"],
+    ["❤ ", " ❤"],
+    ["❥ ", " ❥"],
+    ["ღ ", " ღ"],
+    ["ʚɞ ", " ʚɞ"],
+    ["★ ", " ★"],
+    ["☆ ", " ☆"],
+    ["✦ ", " ✦"],
+    ["✧ ", " ✧"],
+
     ["❀ ", " ❀"],
     ["✿ ", " ✿"],
-    ["☾ ", " ☽"],
+    ["❁ ", " ❁"],
+    ["❃ ", " ❃"],
+    ["❋ ", " ❋"],
+    ["✾ ", " ✾"],
     ["♛ ", " ♛"],
-    ["⚡ ", " ⚡"],
-    ["☁ ", " ☁"],
-    ["⋆｡°✩ ", " ✩°｡⋆"],
-    ["୨♡୧ ", " ୨♡୧"],
-    ["༶•┈┈⛧┈♛", "♛┈⛧┈┈•༶"],
-    ["╔═══", "═══╗"],
-    ["╚══", "══╝"],
-    ["【", "】"],
-    ["《", "》"],
-    ["〈", "〉"],
-    ["〘", "〙"],
-    ["⟦", "⟧"],
-    ["⫷", "⫸"],
-    ["✩｡:*", "*:｡✩"],
-    ["•°¯`•• ", " ••´¯°•"],
-    ["×º°”˜", "˜”°º×"],
-    ["◥", "◤"],
-    ["◈ ", " ◈"],
-    ["◇ ", " ◇"],
-    ["◆ ", " ◆"],
-    ["☯ ", " ☯"],
-    ["☮ ", " ☮"],
-    ["☀ ", " ☀"],
-    ["☾✧ ", " ✧☽"],
     ["♕ ", " ♕"],
     ["♔ ", " ♔"],
     ["⚜ ", " ⚜"],
-    ["❖ ", " ❖"],
+
+    ["☯ ", " ☯"],
+    ["☮ ", " ☮"],
+    ["☾ ", " ☽"],
+    ["☀ ", " ☀"],
+    ["☁ ", " ☁"],
+    ["⚡ ", " ⚡"],
+    ["☄ ", " ☄"],
     ["✪ ", " ✪"],
-    ["✰ ", " ✰"],
     ["✯ ", " ✯"],
-    ["✵ ", " ✵"],
+    ["✰ ", " ✰"],
+
+    ["➳ ", " ➳"],
+    ["➵ ", " ➵"],
+    ["➸ ", " ➸"],
+    ["➤ ", " ➤"],
+    ["➜ ", " ➜"],
+    ["→ ", " ←"],
+    ["← ", " →"],
+    ["↠ ", " ↞"],
+    ["↣ ", " ↢"],
+    ["⇢ ", " ⇠"],
+
+    ["꧁ ", " ꧂"],
+    ["꧁༺ ", " ༻꧂"],
+    ["༺ ", " ༻"],
+    ["༼ ", " ༽"],
+    ["『 ", " 』"],
+    ["【 ", " 】"],
+    ["《 ", " 》"],
+    ["〈 ", " 〉"],
+    ["〘 ", " 〙"],
+    ["〚 ", " 〛"],
+
+    ["⟦ ", " ⟧"],
+    ["⟪ ", " ⟫"],
+    ["⫷ ", " ⫸"],
+    ["⌈ ", " ⌉"],
+    ["⌊ ", " ⌋"],
+    ["╔═ ", " ═╗"],
+    ["╚═ ", " ═╝"],
+    ["╭─ ", " ─╮"],
+    ["╰─ ", " ─╯"],
+    ["┌─ ", " ─┐"],
+
+    ["✧･ﾟ: ", " :･ﾟ✧"],
+    ["⋆｡°✩ ", " ✩°｡⋆"],
+    ["｡･:*˚:✧ ", " ✧:˚*:･｡"],
+    ["•°¯`•• ", " ••´¯°•"],
+    ["×º°”˜ ", " ˜”°º×"],
+    ["★彡 ", " 彡★"],
+    ["☆彡 ", " 彡☆"],
+    ["✪彡 ", " 彡✪"],
+    ["✯彡 ", " 彡✯"],
+    ["✦彡 ", " 彡✦"],
+
+    ["𓆩 ", " 𓆪"],
+    ["𓆩♡ ", " ♡𓆪"],
+    ["𓂀 ", " 𓂀"],
+    ["𖤐 ", " 𖤐"],
+    ["𖣔 ", " 𖣔"],
+    ["𖥔 ", " 𖥔"],
+    ["𖦹 ", " 𖦹"],
+    ["𓇼 ", " 𓇼"],
+    ["𓆉 ", " 𓆉"],
+    ["𓅓 ", " 𓅓"],
+
+    ["୨୧ ", " ୨୧"],
+    ["୨♡୧ ", " ୨♡୧"],
+    ["꒰ ", " ꒱"],
+    ["꒰ঌ ", " ໒꒱"],
+    ["⌁ ", " ⌁"],
+    ["⊹ ", " ⊹"],
+    ["⟡ ", " ⟡"],
     ["✺ ", " ✺"],
-    ["❥ ", " ❥"]
+    ["✵ ", " ✵"],
+    ["❖ ", " ❖"],
+
+    ["╰┈➤ ", ""],
+    ["➤ ", ""],
+    ["↳ ", ""],
+    ["➥ ", ""],
+    ["❯ ", " ❮"],
+    ["› ", " ‹"],
+    ["» ", " «"],
+    ["• ", " •"],
+    ["⋆ ", " ⋆"],
+    ["· ", " ·"]
 ];
 
 
-// ================================
-// CONVERT TEXT
-// ================================
+// =====================================
+// CONVERT
+// =====================================
 
 function convertText(text, map) {
 
-    return text
-        .split("")
-        .map(char => {
+    return text.split("").map(char => {
 
-            const lower = char.toLowerCase();
+        const lower = char.toLowerCase();
 
-            return map[lower] || char;
+        return map[lower] || char;
 
-        })
-        .join("");
+    }).join("");
 }
 
 
-// ================================
-// CREATE UNIQUE COMBINATIONS
-// ================================
+// =====================================
+// MAKE 100 STYLES
+// =====================================
 
-function createCombinations(text) {
+function createStyles(text) {
 
-    const combinations = [];
+    const output = [];
 
-    for (let i = 0; i < fonts.length; i++) {
+    for (let i = 0; i < 100; i++) {
 
-        const styled = convertText(text, fonts[i].map);
+        const font = fonts[i % fonts.length];
 
-        for (let j = 0; j < decorations.length; j++) {
+        const decoration = decorations[i];
 
-            const front = decorations[j][0];
-            const back = decorations[j][1];
+        let styled = convertText(text, font.map);
 
-            combinations.push(front + styled + back);
+        // Different size / case effects
+        if (i % 10 === 1) {
+            styled = styled.toUpperCase();
         }
+
+        if (i % 10 === 2) {
+            styled = styled.toLowerCase();
+        }
+
+        if (i % 10 === 3) {
+            styled = styled.split("").join(" ");
+        }
+
+        if (i % 10 === 4) {
+            styled = styled.split("").join("•");
+        }
+
+        if (i % 10 === 5) {
+            styled = styled.split("").join("·");
+        }
+
+        output.push(
+            decoration[0] +
+            styled +
+            decoration[1]
+        );
     }
 
-    return combinations;
+    return [...new Set(output)];
 }
 
 
-// ================================
+// =====================================
 // GENERATE
-// ================================
+// =====================================
 
 function generateStyles() {
 
@@ -179,7 +339,7 @@ function generateStyles() {
 
         results.innerHTML = `
             <div class="empty-message">
-                Please enter your name or text first.
+                Enter your text above to create stylish versions.
             </div>
         `;
 
@@ -188,43 +348,44 @@ function generateStyles() {
 
     results.innerHTML = "";
 
-    const combinations = createCombinations(text);
+    const styles = createStyles(text);
 
-    // Remove duplicates
-    const uniqueResults = [...new Set(combinations)];
-
-    uniqueResults.forEach((styledText, index) => {
+    styles.forEach((styledText, index) => {
 
         const card = document.createElement("div");
 
         card.className = "result-card";
 
-        card.innerHTML = `
-            <div>
-                <small>Style ${index + 1}</small>
-                <div class="result-text">${styledText}</div>
-            </div>
+        const label = document.createElement("small");
+        label.textContent = `Style ${index + 1}`;
 
-            <button class="copy-btn">
-                COPY
-            </button>
-        `;
+        const resultText = document.createElement("div");
+        resultText.className = "result-text";
+        resultText.textContent = styledText;
 
-        const copyButton = card.querySelector(".copy-btn");
+        const copyButton = document.createElement("button");
+        copyButton.className = "copy-btn";
+        copyButton.textContent = "COPY";
 
-        copyButton.addEventListener("click", function() {
+        copyButton.addEventListener("click", function () {
 
             navigator.clipboard.writeText(styledText);
 
             copyButton.textContent = "COPIED ✓";
 
             setTimeout(() => {
-
                 copyButton.textContent = "COPY";
-
             }, 1500);
 
         });
+
+        const textBox = document.createElement("div");
+
+        textBox.appendChild(label);
+        textBox.appendChild(resultText);
+
+        card.appendChild(textBox);
+        card.appendChild(copyButton);
 
         results.appendChild(card);
 
@@ -232,23 +393,21 @@ function generateStyles() {
 }
 
 
-// ================================
+// =====================================
 // BUTTON
-// ================================
+// =====================================
 
 generateBtn.addEventListener("click", generateStyles);
 
 
-// ================================
+// =====================================
 // ENTER KEY
-// ================================
+// =====================================
 
 textInput.addEventListener("keydown", function(event) {
 
     if (event.key === "Enter") {
-
         generateStyles();
-
     }
 
 });
