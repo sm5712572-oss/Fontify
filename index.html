@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,12 +6,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google Search Console Verification -->
     <meta name="google-site-verification"
-        content="uFM987cAPzmxvRYAVFeXJi2LKWR-NoLGPCw7No7O0jw" />
+        content="uFM987cAPzmxvRYAVFeXJi2LKWR-NoLGPCw7No7O0jw">
 
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HRTW58ZH50"></script>
+
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -32,11 +32,13 @@
     <!-- HEADER -->
     <header>
 
-        <div class="brand">
-            <div class="logo">
-                ✦ FONTIFY ✦
-            </div>
+        <div class="logo">
+            ✦ FONTIFY ✦
         </div>
+
+        <p class="tagline">
+            Stylish Text • Creative Fonts • Beautiful Symbols
+        </p>
 
         <nav>
             <a href="#home">Home</a>
@@ -51,12 +53,12 @@
     <!-- MAIN -->
     <main id="home">
 
-        <!-- HERO SECTION -->
+        <!-- HERO -->
         <section class="hero">
 
-            <p class="small-title">
+            <div class="small-title">
                 CREATE • STYLE • EXPRESS
-            </p>
+            </div>
 
             <h1>
                 Make Your Text
@@ -70,7 +72,7 @@
             </p>
 
 
-            <!-- TEXT GENERATOR -->
+            <!-- GENERATOR -->
             <div class="generator-box">
 
                 <input
@@ -82,7 +84,7 @@
                 >
 
                 <button id="generateBtn">
-                    › Create Style ‹
+                    ✦ Create Style ✦
                 </button>
 
             </div>
@@ -90,10 +92,18 @@
         </section>
 
 
-        <!-- STYLISH TEXT -->
+        <!-- FONTS -->
         <section id="fonts" class="styles-section">
 
-            <h2>⟡ Your Stylish Text ⟡</h2>
+            <div class="section-heading">
+
+                <span class="heading-line"></span>
+
+                <h2>✦ Your Stylish Text ✦</h2>
+
+                <span class="heading-line"></span>
+
+            </div>
 
             <p class="section-description">
                 Choose your favorite style and copy it instantly.
@@ -113,11 +123,20 @@
         <!-- SYMBOLS -->
         <section id="symbols" class="symbols-section">
 
-            <h2>Symbols..♥</h2>
+            <div class="section-heading">
+
+                <span class="heading-line"></span>
+
+                <h2>Symbols..♥</h2>
+
+                <span class="heading-line"></span>
+
+            </div>
 
             <p class="section-description">
                 Click any symbol to copy it.
             </p>
+
 
             <div class="symbols-box">
 
@@ -170,6 +189,13 @@
                 <span>꧁꧂</span>
                 <span>༺༻</span>
 
+                <span>❖</span>
+                <span>◆</span>
+                <span>◇</span>
+                <span>◈</span>
+                <span>✺</span>
+                <span>✵</span>
+
             </div>
 
         </section>
@@ -187,7 +213,8 @@
         </p>
 
         <p class="creator">
-            Created by: <strong>Shaikh Madiha Abdul Hameed</strong>
+            Created by:
+            <strong>Shaikh Madiha Abdul Hameed</strong>
         </p>
 
         <p class="copyright">
@@ -203,20 +230,30 @@
 
     <!-- SYMBOL COPY -->
     <script>
-        document.querySelectorAll('.symbols-box span').forEach(function (symbol) {
-            symbol.addEventListener('click', function () {
-                navigator.clipboard.writeText(this.textContent);
 
-                const oldText = this.textContent;
-                this.textContent = '✓';
+        document
+            .querySelectorAll(".symbols-box span")
+            .forEach(function (symbol) {
 
-                setTimeout(() => {
-                    this.textContent = oldText;
-                }, 700);
+                symbol.addEventListener("click", function () {
+
+                    const oldText = this.textContent;
+
+                    navigator.clipboard.writeText(oldText);
+
+                    this.textContent = "✓";
+
+                    setTimeout(() => {
+                        this.textContent = oldText;
+                    }, 700);
+
+                });
+
             });
-        });
+
     </script>
 
 </body>
 
 </html>
+```
