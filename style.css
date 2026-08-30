@@ -27,21 +27,25 @@ header {
     background: #0b0b16;
 }
 
-.logo {
+
+/* FONTIFY LOGO */
+
+.logo,
+.footer-logo {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 18px;
+}
 
+.logo-text {
     font-size: 42px;
     font-weight: 800;
     letter-spacing: 6px;
+    white-space: nowrap;
 }
 
-.logo::before,
-.logo::after {
-    content: "";
+.logo-line {
     width: 70px;
     height: 1px;
     background: #3b3b57;
@@ -67,7 +71,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #ffffff;
+    color: white;
 }
 
 
@@ -137,10 +141,6 @@ h1 span {
     color: #77778f;
 }
 
-#textInput:focus {
-    background: #1b1b30;
-}
-
 #generateBtn {
     padding: 18px 25px;
     border: none;
@@ -156,7 +156,6 @@ h1 span {
 
 #generateBtn:hover {
     transform: translateY(-2px);
-    filter: brightness(1.08);
 }
 
 
@@ -214,11 +213,6 @@ h2 {
     background: #101020;
 }
 
-
-/* =========================
-   RESULT CARD
-========================= */
-
 .result-card {
     display: flex;
     align-items: center;
@@ -259,12 +253,10 @@ h2 {
     color: white;
     cursor: pointer;
     font-weight: bold;
-    transition: 0.2s;
 }
 
 .copy-btn:hover {
     background: #9472d6;
-    border-color: #9472d6;
 }
 
 
@@ -295,7 +287,6 @@ h2 {
 .symbols-box span:hover {
     transform: translateY(-3px) scale(1.04);
     border-color: #9472d6;
-    background: #1b1b30;
 }
 
 
@@ -310,10 +301,16 @@ footer {
     color: #9999b0;
 }
 
-footer h3 {
-    color: white;
-    font-size: 28px;
-    margin-bottom: 12px;
+.footer-logo {
+    margin-bottom: 18px;
+}
+
+.footer-logo .logo-text {
+    font-size: 30px;
+}
+
+.footer-logo .logo-line {
+    width: 55px;
 }
 
 .creator {
@@ -341,15 +338,18 @@ footer h3 {
         padding: 24px 15px;
     }
 
-    .logo {
-        font-size: 31px;
-        letter-spacing: 4px;
+    .logo,
+    .footer-logo {
         gap: 9px;
     }
 
-    .logo::before,
-    .logo::after {
-        width: 45px;
+    .logo-text {
+        font-size: 31px;
+        letter-spacing: 4px;
+    }
+
+    .logo-line {
+        width: 40px;
     }
 
     nav {
@@ -403,10 +403,6 @@ footer h3 {
         flex-direction: column;
     }
 
-    .result-text {
-        font-size: 21px;
-    }
-
     .copy-btn {
         width: 100%;
     }
@@ -419,5 +415,13 @@ footer h3 {
     .symbols-box span {
         min-height: 58px;
         font-size: 24px;
+    }
+
+    .footer-logo .logo-text {
+        font-size: 24px;
+    }
+
+    .footer-logo .logo-line {
+        width: 30px;
     }
 }
