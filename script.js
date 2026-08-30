@@ -2,334 +2,240 @@ const textInput = document.getElementById("textInput");
 const generateBtn = document.getElementById("generateBtn");
 const results = document.getElementById("results");
 
-// =====================================
-// BASIC FONT MAPS
-// =====================================
+const A = "abcdefghijklmnopqrstuvwxyz";
 
-const fonts = [
+const maps = {
+    bold: "𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳",
+    italic: "𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖𝑗𝑘𝑙𝑚𝑛𝑜𝑝𝑞𝑟𝑠𝑡𝑢𝑣𝑤𝑥𝑦𝑧",
+    boldItalic: "𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛",
+    script: "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏",
+    boldScript: "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃",
+    gothic: "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷",
+    boldGothic: "𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟",
+    double: "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫",
+    mono: "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣",
+    sans: "𝖺𝖻𝖼𝖽𝖾𝖿𝗀𝗁𝗂𝗃𝗄𝗅𝗆𝗇𝗈𝗉𝗊𝗋𝗌𝗍𝗎𝗏𝗐𝗑𝗒𝗓",
+    boldSans: "𝗮𝗯𝗰𝗱𝗲𝗳𝗴𝗵𝗶𝗷𝗸𝗹𝗺𝗻𝗼𝗽𝗾𝗿𝘀𝘁𝘂𝘃𝘄𝘅𝘆𝘇",
+    italicSans: "𝘢𝘣𝘤𝘥𝘦𝘧𝘨𝘩𝘪𝘫𝘬𝘭𝘮𝘯𝘰𝘱𝘲𝘳𝘴𝘵𝘶𝘷𝘸𝘹𝘺𝘻",
+    boldItalicSans: "𝙖𝙗𝙘𝙙𝙚𝙛𝙜𝙝𝙞𝙟𝙠𝙡𝙢𝙣𝙤𝙥𝙦𝙧𝙨𝙩𝙪𝙫𝙬𝙭𝙮𝙯",
+    smallCaps: "ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀsᴛᴜᴠᴡxʏᴢ",
+    fullWidth: "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ"
+};
 
-    {
-        name: "Bold",
-        map: {
-            a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",
-            j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",
-            s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳"
-        }
-    },
+function convert(text, chars) {
+    const map = {};
 
-    {
-        name: "Italic",
-        map: {
-            a:"𝑎",b:"𝑏",c:"𝑐",d:"𝑑",e:"𝑒",f:"𝑓",g:"𝑔",h:"ℎ",i:"𝑖",
-            j:"𝑗",k:"𝑘",l:"𝑙",m:"𝑚",n:"𝑛",o:"𝑜",p:"𝑝",q:"𝑞",r:"𝑟",
-            s:"𝑠",t:"𝑡",u:"𝑢",v:"𝑣",w:"𝑤",x:"𝑥",y:"𝑦",z:"𝑧"
-        }
-    },
-
-    {
-        name: "Bold Italic",
-        map: {
-            a:"𝒂",b:"𝒃",c:"𝒄",d:"𝒅",e:"𝒆",f:"𝒇",g:"𝒈",h:"𝒉",i:"𝒊",
-            j:"𝒋",k:"𝒌",l:"𝒍",m:"𝒎",n:"𝒏",o:"𝒐",p:"𝒑",q:"𝒒",r:"𝒓",
-            s:"𝒔",t:"𝒕",u:"𝒖",v:"𝒗",w:"𝒘",x:"𝒙",y:"𝒚",z:"𝒛"
-        }
-    },
-
-    {
-        name: "Script",
-        map: {
-            a:"𝒶",b:"𝒷",c:"𝒸",d:"𝒹",e:"ℯ",f:"𝒻",g:"ℊ",h:"𝒽",i:"𝒾",
-            j:"𝒿",k:"𝓀",l:"𝓁",m:"𝓂",n:"𝓃",o:"ℴ",p:"𝓅",q:"𝓆",r:"𝓇",
-            s:"𝓈",t:"𝓉",u:"𝓊",v:"𝓋",w:"𝓌",x:"𝓍",y:"𝓎",z:"𝓏"
-        }
-    },
-
-    {
-        name: "Bold Script",
-        map: {
-            a:"𝓪",b:"𝓫",c:"𝓬",d:"𝓭",e:"𝓮",f:"𝓯",g:"𝓰",h:"𝓱",i:"𝓲",
-            j:"𝓳",k:"𝓴",l:"𝓵",m:"𝓶",n:"𝓷",o:"𝓸",p:"𝓹",q:"𝓺",r:"𝓻",
-            s:"𝓼",t:"𝓽",u:"𝓾",v:"𝓿",w:"𝔀",x:"𝔁",y:"𝔂",z:"𝔃"
-        }
-    },
-
-    {
-        name: "Gothic",
-        map: {
-            a:"𝔞",b:"𝔟",c:"𝔠",d:"𝔡",e:"𝔢",f:"𝔣",g:"𝔤",h:"𝔥",i:"𝔦",
-            j:"𝔧",k:"𝔨",l:"𝔩",m:"𝔪",n:"𝔫",o:"𝔬",p:"𝔭",q:"𝔮",r:"𝔯",
-            s:"𝔰",t:"𝔱",u:"𝔲",v:"𝔳",w:"𝔴",x:"𝔵",y:"𝔶",z:"𝔷"
-        }
-    },
-
-    {
-        name: "Bold Gothic",
-        map: {
-            a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",
-            j:"𝖏",k:"𝖐",l:"𝖑",m:"𝖒",n:"𝖓",o:"𝖔",p:"𝖕",q:"𝖖",r:"𝖗",
-            s:"𝖘",t:"𝖙",u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟"
-        }
-    },
-
-    {
-        name: "Double",
-        map: {
-            a:"𝕒",b:"𝕓",c:"𝕔",d:"𝕕",e:"𝕖",f:"𝕗",g:"𝕘",h:"𝕙",i:"𝕚",
-            j:"𝕛",k:"𝕜",l:"𝕝",m:"𝕞",n:"𝕟",o:"𝕠",p:"𝕡",q:"𝕢",r:"𝕣",
-            s:"𝕤",t:"𝕥",u:"𝕦",v:"𝕧",w:"𝕨",x:"𝕩",y:"𝕪",z:"𝕫"
-        }
-    },
-
-    {
-        name: "Sans",
-        map: {
-            a:"𝖺",b:"𝖻",c:"𝖼",d:"𝖽",e:"𝖾",f:"𝖿",g:"𝗀",h:"𝗁",i:"𝗂",
-            j:"𝗃",k:"𝗄",l:"𝗅",m:"𝗆",n:"𝗇",o:"𝗈",p:"𝗉",q:"𝗊",r:"𝗋",
-            s:"𝗌",t:"𝗍",u:"𝗎",v:"𝗏",w:"𝗐",x:"𝗑",y:"𝗒",z:"𝗓"
-        }
-    },
-
-    {
-        name: "Bold Sans",
-        map: {
-            a:"𝗮",b:"𝗯",c:"𝗰",d:"𝗱",e:"𝗲",f:"𝗳",g:"𝗴",h:"𝗵",i:"𝗶",
-            j:"𝗷",k:"𝗸",l:"𝗹",m:"𝗺",n:"𝗻",o:"𝗼",p:"𝗽",q:"𝗾",r:"𝗿",
-            s:"𝘀",t:"𝘁",u:"𝘂",v:"𝘃",w:"𝘄",x:"𝘅",y:"𝘆",z:"𝘇"
-        }
-    },
-
-    {
-        name: "Italic Sans",
-        map: {
-            a:"𝘢",b:"𝘣",c:"𝘤",d:"𝘥",e:"𝘦",f:"𝘧",g:"𝘨",h:"𝘩",i:"𝘪",
-            j:"𝘫",k:"𝘬",l:"𝘭",m:"𝘮",n:"𝘯",o:"𝘰",p:"𝘱",q:"𝘲",r:"𝘳",
-            s:"𝘴",t:"𝘵",u:"𝘶",v:"𝘷",w:"𝘸",x:"𝘹",y:"𝘺",z:"𝘻"
-        }
-    },
-
-    {
-        name: "Bold Italic Sans",
-        map: {
-            a:"𝙖",b:"𝙗",c:"𝙘",d:"𝙙",e:"𝙚",f:"𝙛",g:"𝙜",h:"𝙝",i:"𝙞",
-            j:"𝙟",k:"𝙠",l:"𝙡",m:"𝙢",n:"𝙣",o:"𝙤",p:"𝙥",q:"𝙦",r:"𝙧",
-            s:"𝙨",t:"𝙩",u:"𝙪",v:"𝙫",w:"𝙬",x:"𝙭",y:"𝙮",z:"𝙯"
-        }
-    },
-
-    {
-        name: "Monospace",
-        map: {
-            a:"𝚊",b:"𝚋",c:"𝚌",d:"𝚍",e:"𝚎",f:"𝚏",g:"𝚐",h:"𝚑",i:"𝚒",
-            j:"𝚓",k:"𝚔",l:"𝚕",m:"𝚖",n:"𝚗",o:"𝚘",p:"𝚙",q:"𝚚",r:"𝚛",
-            s:"𝚜",t:"𝚝",u:"𝚞",v:"𝚟",w:"𝚠",x:"𝚡",y:"𝚢",z:"𝚣"
-        }
-    },
-
-    {
-        name: "Small Caps",
-        map: {
-            a:"ᴀ",b:"ʙ",c:"ᴄ",d:"ᴅ",e:"ᴇ",f:"ꜰ",g:"ɢ",h:"ʜ",i:"ɪ",
-            j:"ᴊ",k:"ᴋ",l:"ʟ",m:"ᴍ",n:"ɴ",o:"ᴏ",p:"ᴘ",q:"ǫ",r:"ʀ",
-            s:"s",t:"ᴛ",u:"ᴜ",v:"ᴠ",w:"ᴡ",x:"x",y:"ʏ",z:"ᴢ"
-        }
-    },
-
-    {
-        name: "Full Width",
-        map: {
-            a:"ａ",b:"ｂ",c:"ｃ",d:"ｄ",e:"ｅ",f:"ｆ",g:"ｇ",h:"ｈ",i:"ｉ",
-            j:"ｊ",k:"ｋ",l:"ｌ",m:"ｍ",n:"ｎ",o:"ｏ",p:"ｐ",q:"ｑ",r:"ｒ",
-            s:"ｓ",t:"ｔ",u:"ｕ",v:"ｖ",w:"ｗ",x:"ｘ",y:"ｙ",z:"ｚ"
-        }
+    for (let i = 0; i < A.length; i++) {
+        map[A[i]] = chars[i];
     }
-];
-
-
-// =====================================
-// DECORATIONS — 100 DIFFERENT
-// =====================================
-
-const decorations = [
-
-    ["♡ ", " ♡"],
-    ["♥ ", " ♥"],
-    ["❤ ", " ❤"],
-    ["❥ ", " ❥"],
-    ["ღ ", " ღ"],
-    ["ʚɞ ", " ʚɞ"],
-    ["★ ", " ★"],
-    ["☆ ", " ☆"],
-    ["✦ ", " ✦"],
-    ["✧ ", " ✧"],
-
-    ["❀ ", " ❀"],
-    ["✿ ", " ✿"],
-    ["❁ ", " ❁"],
-    ["❃ ", " ❃"],
-    ["❋ ", " ❋"],
-    ["✾ ", " ✾"],
-    ["♛ ", " ♛"],
-    ["♕ ", " ♕"],
-    ["♔ ", " ♔"],
-    ["⚜ ", " ⚜"],
-
-    ["☯ ", " ☯"],
-    ["☮ ", " ☮"],
-    ["☾ ", " ☽"],
-    ["☀ ", " ☀"],
-    ["☁ ", " ☁"],
-    ["⚡ ", " ⚡"],
-    ["☄ ", " ☄"],
-    ["✪ ", " ✪"],
-    ["✯ ", " ✯"],
-    ["✰ ", " ✰"],
-
-    ["➳ ", " ➳"],
-    ["➵ ", " ➵"],
-    ["➸ ", " ➸"],
-    ["➤ ", " ➤"],
-    ["➜ ", " ➜"],
-    ["→ ", " ←"],
-    ["← ", " →"],
-    ["↠ ", " ↞"],
-    ["↣ ", " ↢"],
-    ["⇢ ", " ⇠"],
-
-    ["꧁ ", " ꧂"],
-    ["꧁༺ ", " ༻꧂"],
-    ["༺ ", " ༻"],
-    ["༼ ", " ༽"],
-    ["『 ", " 』"],
-    ["【 ", " 】"],
-    ["《 ", " 》"],
-    ["〈 ", " 〉"],
-    ["〘 ", " 〙"],
-    ["〚 ", " 〛"],
-
-    ["⟦ ", " ⟧"],
-    ["⟪ ", " ⟫"],
-    ["⫷ ", " ⫸"],
-    ["⌈ ", " ⌉"],
-    ["⌊ ", " ⌋"],
-    ["╔═ ", " ═╗"],
-    ["╚═ ", " ═╝"],
-    ["╭─ ", " ─╮"],
-    ["╰─ ", " ─╯"],
-    ["┌─ ", " ─┐"],
-
-    ["✧･ﾟ: ", " :･ﾟ✧"],
-    ["⋆｡°✩ ", " ✩°｡⋆"],
-    ["｡･:*˚:✧ ", " ✧:˚*:･｡"],
-    ["•°¯`•• ", " ••´¯°•"],
-    ["×º°”˜ ", " ˜”°º×"],
-    ["★彡 ", " 彡★"],
-    ["☆彡 ", " 彡☆"],
-    ["✪彡 ", " 彡✪"],
-    ["✯彡 ", " 彡✯"],
-    ["✦彡 ", " 彡✦"],
-
-    ["𓆩 ", " 𓆪"],
-    ["𓆩♡ ", " ♡𓆪"],
-    ["𓂀 ", " 𓂀"],
-    ["𖤐 ", " 𖤐"],
-    ["𖣔 ", " 𖣔"],
-    ["𖥔 ", " 𖥔"],
-    ["𖦹 ", " 𖦹"],
-    ["𓇼 ", " 𓇼"],
-    ["𓆉 ", " 𓆉"],
-    ["𓅓 ", " 𓅓"],
-
-    ["୨୧ ", " ୨୧"],
-    ["୨♡୧ ", " ୨♡୧"],
-    ["꒰ ", " ꒱"],
-    ["꒰ঌ ", " ໒꒱"],
-    ["⌁ ", " ⌁"],
-    ["⊹ ", " ⊹"],
-    ["⟡ ", " ⟡"],
-    ["✺ ", " ✺"],
-    ["✵ ", " ✵"],
-    ["❖ ", " ❖"],
-
-    ["╰┈➤ ", ""],
-    ["➤ ", ""],
-    ["↳ ", ""],
-    ["➥ ", ""],
-    ["❯ ", " ❮"],
-    ["› ", " ‹"],
-    ["» ", " «"],
-    ["• ", " •"],
-    ["⋆ ", " ⋆"],
-    ["· ", " ·"]
-];
-
-
-// =====================================
-// CONVERT
-// =====================================
-
-function convertText(text, map) {
 
     return text.split("").map(char => {
-
-        const lower = char.toLowerCase();
-
-        return map[lower] || char;
-
+        return map[char.toLowerCase()] || char;
     }).join("");
 }
 
+function circle(text) {
+    const normal = "abcdefghijklmnopqrstuvwxyz";
+    const circled = "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ";
 
-// =====================================
-// MAKE 100 STYLES
-// =====================================
+    return text.split("").map(c => {
+        const i = normal.indexOf(c.toLowerCase());
+        return i >= 0 ? circled[i] : c;
+    }).join("");
+}
 
-function createStyles(text) {
+function square(text) {
+    const normal = "abcdefghijklmnopqrstuvwxyz";
+    const squared = "🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉";
 
-    const output = [];
+    return text.split("").map(c => {
+        const i = normal.indexOf(c.toLowerCase());
+        return i >= 0 ? squared[i] : c;
+    }).join("");
+}
 
-    for (let i = 0; i < 100; i++) {
+function superscript(text) {
+    const map = {
+        a:"ᵃ",b:"ᵇ",c:"ᶜ",d:"ᵈ",e:"ᵉ",f:"ᶠ",g:"ᵍ",h:"ʰ",
+        i:"ⁱ",j:"ʲ",k:"ᵏ",l:"ˡ",m:"ᵐ",n:"ⁿ",o:"ᵒ",p:"ᵖ",
+        q:"ᑫ",r:"ʳ",s:"ˢ",t:"ᵗ",u:"ᵘ",v:"ᵛ",w:"ʷ",x:"ˣ",
+        y:"ʸ",z:"ᶻ"
+    };
 
-        const font = fonts[i % fonts.length];
+    return text.split("").map(c => map[c.toLowerCase()] || c).join("");
+}
 
-        const decoration = decorations[i];
+function spaced(text) {
+    return text.split("").join(" ");
+}
 
-        let styled = convertText(text, font.map);
+function dotted(text) {
+    return text.split("").join("•");
+}
 
-        // Different size / case effects
-        if (i % 10 === 1) {
-            styled = styled.toUpperCase();
-        }
+function underline(text) {
+    return text.split("").map(c => c + "\u0332").join("");
+}
 
-        if (i % 10 === 2) {
-            styled = styled.toLowerCase();
-        }
+function strike(text) {
+    return text.split("").map(c => c + "\u0336").join("");
+}
 
-        if (i % 10 === 3) {
-            styled = styled.split("").join(" ");
-        }
+function slash(text) {
+    return text.split("").map(c => c + "\u0337").join("");
+}
 
-        if (i % 10 === 4) {
-            styled = styled.split("").join("•");
-        }
+function doubleUnderline(text) {
+    return text.split("").map(c => c + "\u0333").join("");
+}
 
-        if (i % 10 === 5) {
-            styled = styled.split("").join("·");
-        }
+function wave(text) {
+    return text.split("").map(c => c + "\u0330").join("");
+}
 
-        output.push(
-            decoration[0] +
-            styled +
-            decoration[1]
-        );
-    }
-
-    return [...new Set(output)];
+function reverse(text) {
+    return text.split("").reverse().join("");
 }
 
 
-// =====================================
+// ========================================
+// 100 DIFFERENT STYLES
+// ========================================
+
+function createStyles(text) {
+
+    const styles = [
+
+        `♡ ${convert(text,maps.script)} ♡`,
+        `♥ ${convert(text,maps.bold)} ♥`,
+        `★ ${convert(text,maps.gothic)} ★`,
+        `✦ ${convert(text,maps.boldScript)} ✦`,
+        `❀ ${convert(text,maps.italic)} ❀`,
+        `☾ ${convert(text,maps.double)} ☽`,
+        `⚡ ${convert(text,maps.boldItalic)} ⚡`,
+        `♛ ${convert(text,maps.boldGothic)} ♛`,
+        `✧ ${convert(text,maps.mono)} ✧`,
+        `❖ ${convert(text,maps.sans)} ❖`,
+
+        `𓆩 ${convert(text,maps.boldSans)} 𓆪`,
+        `୨୧ ${convert(text,maps.italicSans)} ୨୧`,
+        `꧁ ${convert(text,maps.gothic)} ꧂`,
+        `༺ ${convert(text,maps.script)} ༻`,
+        `『 ${convert(text,maps.bold)} 』`,
+        `【 ${convert(text,maps.double)} 】`,
+        `《 ${convert(text,maps.boldItalic)} 》`,
+        `〈 ${convert(text,maps.mono)} 〉`,
+        `〘 ${convert(text,maps.boldScript)} 〙`,
+        `⟦ ${convert(text,maps.sans)} ⟧`,
+
+        `♡ ${circle(text)} ♡`,
+        `★ ${square(text)} ★`,
+        `✦ ${superscript(text)} ✦`,
+        `❥ ${text.toUpperCase()} ❥`,
+        `ღ ${text.toLowerCase()} ღ`,
+        `✿ ${spaced(text)} ✿`,
+        `❀ ${dotted(text)} ❀`,
+        `☁ ${underline(text)} ☁`,
+        `⚜ ${strike(text)} ⚜`,
+        `☄ ${slash(text)} ☄`,
+
+        `➳ ${convert(text,maps.script)} ➳`,
+        `➵ ${convert(text,maps.bold)} ➵`,
+        `➸ ${convert(text,maps.italic)} ➸`,
+        `➤ ${convert(text,maps.gothic)} ➤`,
+        `➜ ${convert(text,maps.double)} ➜`,
+        `→ ${convert(text,maps.boldSans)} ←`,
+        `↠ ${convert(text,maps.boldItalicSans)} ↞`,
+        `↣ ${convert(text,maps.mono)} ↢`,
+        `⇢ ${convert(text,maps.sans)} ⇠`,
+        `❯ ${convert(text,maps.smallCaps)} ❮`,
+
+        `✺ ${convert(text,maps.script)} ✺`,
+        `✵ ${convert(text,maps.boldScript)} ✵`,
+        `✪ ${convert(text,maps.boldGothic)} ✪`,
+        `✯ ${convert(text,maps.italicSans)} ✯`,
+        `✰ ${convert(text,maps.boldSans)} ✰`,
+        `❋ ${convert(text,maps.italic)} ❋`,
+        `❃ ${convert(text,maps.double)} ❃`,
+        `✾ ${convert(text,maps.mono)} ✾`,
+        `❁ ${convert(text,maps.gothic)} ❁`,
+        `❖ ${convert(text,maps.boldItalic)} ❖`,
+
+        `꧁༺ ${convert(text,maps.bold)} ༻꧂`,
+        `『✦ ${convert(text,maps.script)} ✦』`,
+        `『♡ ${convert(text,maps.italic)} ♡』`,
+        `★彡 ${convert(text,maps.boldScript)} 彡★`,
+        `☆彡 ${convert(text,maps.gothic)} 彡☆`,
+        `✪彡 ${convert(text,maps.double)} 彡✪`,
+        `✯彡 ${convert(text,maps.mono)} 彡✯`,
+        `✦彡 ${convert(text,maps.boldSans)} 彡✦`,
+        `☾✧ ${convert(text,maps.italicSans)} ✧☽`,
+        `⋆｡°✩ ${convert(text,maps.boldItalicSans)} ✩°｡⋆`,
+
+        `𓆩♡ ${convert(text,maps.script)} ♡𓆪`,
+        `𓆩✦ ${convert(text,maps.bold)} ✦𓆪`,
+        `𖤐 ${convert(text,maps.gothic)} 𖤐`,
+        `𖣔 ${convert(text,maps.boldGothic)} 𖣔`,
+        `𖥔 ${convert(text,maps.double)} 𖥔`,
+        `𖦹 ${convert(text,maps.italic)} 𖦹`,
+        `𓇼 ${convert(text,maps.mono)} 𓇼`,
+        `𓆉 ${convert(text,maps.boldSans)} 𓆉`,
+        `𓅓 ${convert(text,maps.script)} 𓅓`,
+        `𓂀 ${convert(text,maps.boldItalic)} 𓂀`,
+
+        `╭─ ${convert(text,maps.bold)} ─╮`,
+        `╰─ ${convert(text,maps.italic)} ─╯`,
+        `┌─ ${convert(text,maps.script)} ─┐`,
+        `└─ ${convert(text,maps.gothic)} ─┘`,
+        `╔═ ${convert(text,maps.double)} ═╗`,
+        `╚═ ${convert(text,maps.boldScript)} ═╝`,
+        `╭━━ ${convert(text,maps.boldSans)} ━━╮`,
+        `╰━━ ${convert(text,maps.mono)} ━━╯`,
+        `┏━━ ${convert(text,maps.boldItalic)} ━━┓`,
+        `┗━━ ${convert(text,maps.italicSans)} ━━┛`,
+
+        `• ${convert(text,maps.smallCaps)} •`,
+        `· ${convert(text,maps.fullWidth)} ·`,
+        `⋆ ${convert(text,maps.bold)} ⋆`,
+        `⊹ ${convert(text,maps.script)} ⊹`,
+        `⟡ ${convert(text,maps.italic)} ⟡`,
+        `⌁ ${convert(text,maps.gothic)} ⌁`,
+        `∘ ${convert(text,maps.double)} ∘`,
+        `◈ ${convert(text,maps.boldGothic)} ◈`,
+        `◇ ${convert(text,maps.boldScript)} ◇`,
+        `◆ ${convert(text,maps.mono)} ◆`,
+
+        `♥︎ ${underline(convert(text,maps.bold))} ♥︎`,
+        `♡⃝ ${strike(convert(text,maps.script))} ♡⃝`,
+        `✧ ${doubleUnderline(convert(text,maps.italic))} ✧`,
+        `★ ${wave(convert(text,maps.boldItalic))} ★`,
+        `❥ ${slash(convert(text,maps.gothic))} ❥`,
+        `☾ ${underline(convert(text,maps.double))} ☽`,
+        `⚡ ${strike(convert(text,maps.boldSans))} ⚡`,
+        `♛ ${doubleUnderline(convert(text,maps.script))} ♛`,
+        `✿ ${wave(convert(text,maps.boldScript))} ✿`,
+        `❀ ${underline(convert(text,maps.mono))} ❀`,
+
+        `› ${convert(text,maps.bold)} ‹`,
+        `› ${convert(text,maps.script)} ‹`,
+        `» ${convert(text,maps.italic)} «`,
+        `« ${convert(text,maps.gothic)} »`,
+        `➤ ${convert(text,maps.boldScript)} ➤`,
+        `➳ ${convert(text,maps.double)} ➳`,
+        `↳ ${convert(text,maps.boldItalic)} ↳`,
+        `❯ ${convert(text,maps.boldSans)} ❮`,
+        `✦ ${circle(text)} ✦`,
+        `♥ ${square(text)} ♥`
+
+    ];
+
+    return styles.slice(0, 100);
+}
+
+
+// ========================================
 // GENERATE
-// =====================================
+// ========================================
 
 function generateStyles() {
 
@@ -339,7 +245,7 @@ function generateStyles() {
 
         results.innerHTML = `
             <div class="empty-message">
-                Enter your text above to create stylish versions.
+                Enter Your Text...
             </div>
         `;
 
@@ -356,35 +262,48 @@ function generateStyles() {
 
         card.className = "result-card";
 
-        const label = document.createElement("small");
-        label.textContent = `Style ${index + 1}`;
+        const info = document.createElement("div");
 
-        const resultText = document.createElement("div");
-        resultText.className = "result-text";
-        resultText.textContent = styledText;
+        const number = document.createElement("small");
+        number.textContent = `Style ${index + 1}`;
+
+        const output = document.createElement("div");
+        output.className = "result-text";
+        output.textContent = styledText;
+
+        info.appendChild(number);
+        info.appendChild(output);
 
         const copyButton = document.createElement("button");
+
         copyButton.className = "copy-btn";
         copyButton.textContent = "COPY";
 
-        copyButton.addEventListener("click", function () {
+        copyButton.addEventListener("click", async () => {
 
-            navigator.clipboard.writeText(styledText);
+            try {
 
-            copyButton.textContent = "COPIED ✓";
+                await navigator.clipboard.writeText(styledText);
 
-            setTimeout(() => {
-                copyButton.textContent = "COPY";
-            }, 1500);
+                copyButton.textContent = "COPIED ✓";
+
+                setTimeout(() => {
+                    copyButton.textContent = "COPY";
+                }, 1500);
+
+            } catch {
+
+                copyButton.textContent = "COPY FAILED";
+
+                setTimeout(() => {
+                    copyButton.textContent = "COPY";
+                }, 1500);
+
+            }
 
         });
 
-        const textBox = document.createElement("div");
-
-        textBox.appendChild(label);
-        textBox.appendChild(resultText);
-
-        card.appendChild(textBox);
+        card.appendChild(info);
         card.appendChild(copyButton);
 
         results.appendChild(card);
@@ -393,16 +312,16 @@ function generateStyles() {
 }
 
 
-// =====================================
+// ========================================
 // BUTTON
-// =====================================
+// ========================================
 
 generateBtn.addEventListener("click", generateStyles);
 
 
-// =====================================
+// ========================================
 // ENTER KEY
-// =====================================
+// ========================================
 
 textInput.addEventListener("keydown", function(event) {
 
