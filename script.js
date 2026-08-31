@@ -5,11 +5,12 @@ const textInput = document.getElementById("textInput");
 const generateBtn = document.getElementById("generateBtn");
 const results = document.getElementById("results");
 
+
 // =====================================================
 // FONT MAPS
 // =====================================================
 
-const maps = {
+const fonts = {
 
     bold: {
         a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",
@@ -39,30 +40,6 @@ const maps = {
         a:"𝚊",b:"𝚋",c:"𝚌",d:"𝚍",e:"𝚎",f:"𝚏",g:"𝚐",h:"𝚑",i:"𝚒",
         j:"𝚓",k:"𝚔",l:"𝚕",m:"𝚖",n:"𝚗",o:"𝚘",p:"𝚙",q:"𝚚",r:"𝚛",
         s:"𝚜",t:"𝚝",u:"𝚞",v:"𝚟",w:"𝚠",x:"𝚡",y:"𝚢",z:"𝚣"
-    },
-
-    sansBold: {
-        a:"𝗮",b:"𝗯",c:"𝗰",d:"𝗱",e:"𝗲",f:"𝗳",g:"𝗴",h:"𝗵",i:"𝗶",
-        j:"𝗷",k:"𝗸",l:"𝗹",m:"𝗺",n:"𝗻",o:"𝗼",p:"𝗽",q:"𝗾",r:"𝗿",
-        s:"𝘀",t:"𝘁",u:"𝘂",v:"𝘃",w:"𝘄",x:"𝘅",y:"𝘆",z:"𝘇"
-    },
-
-    sansItalic: {
-        a:"𝘢",b:"𝘣",c:"𝘤",d:"𝘥",e:"𝘦",f:"𝘧",g:"𝘨",h:"𝘩",i:"𝘪",
-        j:"𝘫",k:"𝘬",l:"𝘭",m:"𝘮",n:"𝘯",o:"𝘰",p:"𝘱",q:"𝘲",r:"𝘳",
-        s:"𝘴",t:"𝘵",u:"𝘶",v:"𝘷",w:"𝘸",x:"𝘹",y:"𝘺",z:"𝘻"
-    },
-
-    sansBoldItalic: {
-        a:"𝙖",b:"𝙗",c:"𝙘",d:"𝙙",e:"𝙚",f:"𝙛",g:"𝙜",h:"𝙝",i:"𝙞",
-        j:"𝙟",k:"𝙠",l:"𝙡",m:"𝙢",n:"𝙣",o:"𝙤",p:"𝙥",q:"𝙦",r:"𝙧",
-        s:"𝙨",t:"𝙩",u:"𝙪",v:"𝙫",w:"𝙬",x:"𝙭",y:"𝙮",z:"𝙯"
-    },
-
-    serifBold: {
-        a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",
-        j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",
-        s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳"
     },
 
     fraktur: {
@@ -95,19 +72,13 @@ const maps = {
         s:"ⓢ",t:"ⓣ",u:"ⓤ",v:"ⓥ",w:"ⓦ",x:"ⓧ",y:"ⓨ",z:"ⓩ"
     },
 
-    squared: {
-        a:"🄰",b:"🄱",c:"🄲",d:"🄳",e:"🄴",f:"🄵",g:"🄶",h:"🄷",i:"🄸",
-        j:"🄹",k:"🄺",l:"🄻",m:"🄼",n:"🄽",o:"🄾",p:"🄿",q:"🅀",r:"🅁",
-        s:"🅂",t:"🅃",u:"🅄",v:"🅅",w:"🅆",x:"🅇",y:"🅈",z:"🅉"
-    },
-
-    fullWidth: {
+    full: {
         a:"ａ",b:"ｂ",c:"ｃ",d:"ｄ",e:"ｅ",f:"ｆ",g:"ｇ",h:"ｈ",i:"ｉ",
         j:"ｊ",k:"ｋ",l:"ｌ",m:"ｍ",n:"ｎ",o:"ｏ",p:"ｐ",q:"ｑ",r:"ｒ",
         s:"ｓ",t:"ｔ",u:"ｕ",v:"ｖ",w:"ｗ",x:"ｘ",y:"ｙ",z:"ｚ"
     },
 
-    smallCaps: {
+    small: {
         a:"ᴀ",b:"ʙ",c:"ᴄ",d:"ᴅ",e:"ᴇ",f:"ꜰ",g:"ɢ",h:"ʜ",i:"ɪ",
         j:"ᴊ",k:"ᴋ",l:"ʟ",m:"ᴍ",n:"ɴ",o:"ᴏ",p:"ᴘ",q:"ǫ",r:"ʀ",
         s:"s",t:"ᴛ",u:"ᴜ",v:"ᴠ",w:"ᴡ",x:"x",y:"ʏ",z:"ᴢ"
@@ -115,68 +86,78 @@ const maps = {
 
 };
 
+
 function convert(text, map) {
-    return [...text].map(c => map[c.toLowerCase()] || c).join("");
+    return [...text]
+        .map(char => map[char.toLowerCase()] || char)
+        .join("");
 }
+
 
 // =====================================================
 // 50 STYLES
 // =====================================================
 
 const styles = [
-    ["Bold", t => convert(t, maps.bold)],
-    ["Italic", t => convert(t, maps.italic)],
-    ["Bold Italic", t => convert(t, maps.boldItalic)],
-    ["Double", t => convert(t, maps.double)],
-    ["Monospace", t => convert(t, maps.mono)],
-    ["Sans Bold", t => convert(t, maps.sansBold)],
-    ["Sans Italic", t => convert(t, maps.sansItalic)],
-    ["Sans Bold Italic", t => convert(t, maps.sansBoldItalic)],
-    ["Fraktur", t => convert(t, maps.fraktur)],
-    ["Fraktur Bold", t => convert(t, maps.frakturBold)],
-    ["Script", t => convert(t, maps.script)],
-    ["Script Bold", t => convert(t, maps.scriptBold)],
-    ["Circled", t => convert(t, maps.circled)],
-    ["Squared", t => convert(t, maps.squared)],
-    ["Full Width", t => convert(t, maps.fullWidth)],
-    ["Small Caps", t => convert(t, maps.smallCaps)],
 
-    ["Spaced", t => t.split("").join(" ")],
-    ["Wide", t => t.split("").join("  ")],
-    ["Dotted", t => t.split("").join(" • ")],
-    ["Vertical", t => t.split("").join(" │ ")],
+    ["Bold", t => convert(t, fonts.bold)],
+    ["Italic", t => convert(t, fonts.italic)],
+    ["Bold Italic", t => convert(t, fonts.boldItalic)],
+    ["Double", t => convert(t, fonts.double)],
+    ["Monospace", t => convert(t, fonts.mono)],
+    ["Fraktur", t => convert(t, fonts.fraktur)],
+    ["Fraktur Bold", t => convert(t, fonts.frakturBold)],
+    ["Script", t => convert(t, fonts.script)],
+    ["Script Bold", t => convert(t, fonts.scriptBold)],
+    ["Circled", t => convert(t, fonts.circled)],
+    ["Full Width", t => convert(t, fonts.full)],
+    ["Small Caps", t => convert(t, fonts.small)],
 
-    ["♡ Heart", t => "♡ " + t + " ♡"],
-    ["♥ Love", t => "♥ " + t + " ♥"],
-    ["❀ Flower", t => "❀ " + t + " ❀"],
-    ["✿ Blossom", t => "✿ " + t + " ✿"],
-    ["★ Star", t => "★ " + t + " ★"],
-    ["✦ Spark", t => "✦ " + t + " ✦"],
-    ["✧ Shine", t => "✧ " + t + " ✧"],
-    ["♛ Crown", t => "♛ " + t + " ♛"],
-    ["♕ Royal", t => "♕ " + t + " ♕"],
-    ["☾ Moon", t => "☾ " + t + " ☽"],
-    ["☁ Cloud", t => "☁ " + t + " ☁"],
-    ["⚡ Lightning", t => "⚡ " + t + " ⚡"],
-    ["☮ Peace", t => "☮ " + t + " ☮"],
-    ["☯ Yin Yang", t => "☯ " + t + " ☯"],
-    ["☀ Sun", t => "☀ " + t + " ☀"],
-    ["∞ Infinity", t => "∞ " + t + " ∞"],
-    ["➜ Arrow", t => "➜ " + t + " ➜"],
-    ["୨♡୧ Cute", t => "୨♡୧ " + t + " ୨♡୧"],
-    ["𓆩 Mystic", t => "𓆩 " + t + " 𓆪"],
-    ["⋆ Aesthetic", t => "⋆｡°✩ " + t + " ✩°｡⋆"],
-    ["꧁ Royal Frame", t => "꧁༺ " + t + " ༻꧂"],
-    ["【 Square Frame", t => "【 " + t + " 】"],
-    ["『 Elegant Frame", t => "『 " + t + " 』"],
-    ["《 Classic Frame", t => "《 " + t + " 》"],
-    ["◇ Diamond", t => "◇ " + t + " ◇"],
-    ["◆ Black Diamond", t => "◆ " + t + " ◆"],
+    ["Bold Heart", t => "♡ " + convert(t, fonts.bold) + " ♡"],
+    ["Italic Heart", t => "♥ " + convert(t, fonts.italic) + " ♥"],
+    ["Double Heart", t => "♡ " + convert(t, fonts.double) + " ♡"],
+    ["Script Heart", t => "୨♡୧ " + convert(t, fonts.script) + " ୨♡୧"],
+    ["Bold Stars", t => "★ " + convert(t, fonts.bold) + " ★"],
+    ["Italic Stars", t => "✦ " + convert(t, fonts.italic) + " ✦"],
+    ["Double Stars", t => "✧ " + convert(t, fonts.double) + " ✧"],
+    ["Script Stars", t => "✩ " + convert(t, fonts.script) + " ✩"],
+
+    ["Crown Bold", t => "♛ " + convert(t, fonts.bold) + " ♛"],
+    ["Crown Script", t => "♕ " + convert(t, fonts.script) + " ♕"],
+    ["Moon Italic", t => "☾ " + convert(t, fonts.italic) + " ☽"],
+    ["Moon Bold", t => "☾ " + convert(t, fonts.bold) + " ☽"],
+    ["Flower Script", t => "❀ " + convert(t, fonts.script) + " ❀"],
+    ["Flower Bold", t => "✿ " + convert(t, fonts.bold) + " ✿"],
+    ["Diamond Double", t => "◇ " + convert(t, fonts.double) + " ◇"],
+    ["Diamond Bold", t => "◆ " + convert(t, fonts.bold) + " ◆"],
+    ["Spark Bold", t => "✦ " + convert(t, fonts.bold) + " ✦"],
+    ["Spark Script", t => "✧ " + convert(t, fonts.script) + " ✧"],
+    ["Cloud Italic", t => "☁ " + convert(t, fonts.italic) + " ☁"],
+    ["Lightning Bold", t => "⚡ " + convert(t, fonts.bold) + " ⚡"],
+    ["Peace Double", t => "☮ " + convert(t, fonts.double) + " ☮"],
+    ["Sun Script", t => "☀ " + convert(t, fonts.script) + " ☀"],
+    ["Infinity Bold", t => "∞ " + convert(t, fonts.bold) + " ∞"],
+
+    ["Cute", t => "୨♡୧ " + t + " ୨♡୧"],
+    ["Aesthetic", t => "⋆｡°✩ " + t + " ✩°｡⋆"],
+    ["Mystic", t => "𓆩♡ " + t + " ♡𓆪"],
+    ["Royal Frame", t => "꧁༺ " + convert(t, fonts.bold) + " ༻꧂"],
+    ["Elegant Frame", t => "『 " + convert(t, fonts.italic) + " 』"],
+    ["Classic Frame", t => "《 " + convert(t, fonts.double) + " 》"],
+    ["Square Frame", t => "【 " + convert(t, fonts.bold) + " 】"],
+    ["Angle Frame", t => "〈 " + convert(t, fonts.script) + " 〉"],
+    ["Arrow Style", t => "➜ " + convert(t, fonts.bold) + " ➜"],
+    ["Peaceful Style", t => "☯ " + convert(t, fonts.italic) + " ☯"],
+    ["Royal Luxury", t => "♛━━ " + convert(t, fonts.bold) + " ━━♛"],
+    ["Heart Line", t => "♡━━ " + convert(t, fonts.script) + " ━━♡"],
+    ["Star Line", t => "★━━ " + convert(t, fonts.bold) + " ━━★"],
+    ["Fancy Line", t => "༺═━━ " + convert(t, fonts.italic) + " ━━═༻"],
+
     ["Underline", t => [...t].map(c => c + "\u0332").join("")],
-    ["Strike", t => [...t].map(c => c + "\u0336").join("")],
-    ["Dot Under", t => [...t].map(c => c + "\u0323").join("")],
-    ["Top Line", t => [...t].map(c => c + "\u0305").join("")]
+    ["Strike", t => [...t].map(c => c + "\u0336").join("")]
+
 ];
+
 
 // =====================================================
 // GENERATE
@@ -187,27 +168,24 @@ function generateStyles() {
     const text = textInput.value.trim();
 
     if (!text) {
+
         results.innerHTML = `
             <div class="empty-message">
                 Please enter your name or text first.
             </div>
         `;
+
         return;
     }
 
     results.innerHTML = "";
 
-    const used = new Set();
-
     styles.forEach((style, index) => {
 
         const styledText = style[1](text);
 
-        if (used.has(styledText)) return;
-
-        used.add(styledText);
-
         const card = document.createElement("div");
+
         card.className = "result-card";
 
         card.innerHTML = `
@@ -215,6 +193,7 @@ function generateStyles() {
                 <small>${style[0]} • Style ${index + 1}</small>
                 <div class="result-text"></div>
             </div>
+
             <button class="copy-btn">COPY</button>
         `;
 
@@ -225,37 +204,52 @@ function generateStyles() {
         copyButton.addEventListener("click", async () => {
 
             try {
+
                 await navigator.clipboard.writeText(styledText);
+
                 copyButton.textContent = "COPIED ✓";
 
                 setTimeout(() => {
                     copyButton.textContent = "COPY";
                 }, 1500);
 
-            } catch {
+            } catch (error) {
+
                 copyButton.textContent = "COPY FAILED";
+
             }
 
         });
 
         results.appendChild(card);
+
     });
+
 }
 
+
 // =====================================================
-// BUTTON + ENTER
+// BUTTON
 // =====================================================
 
 generateBtn.addEventListener("click", generateStyles);
 
+
+// =====================================================
+// ENTER KEY
+// =====================================================
+
 textInput.addEventListener("keydown", event => {
+
     if (event.key === "Enter") {
         generateStyles();
     }
+
 });
 
+
 // =====================================================
-// RATING → SUPABASE
+// RATING
 // =====================================================
 
 const stars = document.querySelectorAll(".star");
@@ -268,10 +262,12 @@ stars.forEach(star => {
         const rating = Number(star.dataset.rating);
 
         stars.forEach(item => {
+
             item.classList.toggle(
                 "active",
                 Number(item.dataset.rating) <= rating
             );
+
         });
 
         if (ratingMessage) {
@@ -309,12 +305,15 @@ stars.forEach(star => {
 
         } catch (error) {
 
-            console.error("Rating error:", error);
+            console.error(error);
 
             if (ratingMessage) {
                 ratingMessage.textContent =
                     "Couldn't save rating. Please try again.";
             }
+
         }
+
     });
+
 });
