@@ -27,9 +27,6 @@ header {
     background: #0b0b16;
 }
 
-
-/* FONTIFY LOGO */
-
 .logo,
 .footer-logo {
     display: flex;
@@ -53,14 +50,15 @@ header {
 
 
 /* =========================
-   NAVIGATION
+   NAV
 ========================= */
 
 nav {
     margin-top: 25px;
     display: flex;
     justify-content: center;
-    gap: 34px;
+    gap: 30px;
+    flex-wrap: wrap;
 }
 
 nav a {
@@ -156,6 +154,7 @@ h1 span {
 
 #generateBtn:hover {
     transform: translateY(-2px);
+    filter: brightness(1.08);
 }
 
 
@@ -164,7 +163,8 @@ h1 span {
 ========================= */
 
 .styles-section,
-.symbols-section {
+.symbols-section,
+.rating-section {
     max-width: 1050px;
     margin: auto;
     padding: 75px 20px;
@@ -253,10 +253,12 @@ h2 {
     color: white;
     cursor: pointer;
     font-weight: bold;
+    transition: 0.2s;
 }
 
 .copy-btn:hover {
     background: #9472d6;
+    border-color: #9472d6;
 }
 
 
@@ -287,6 +289,52 @@ h2 {
 .symbols-box span:hover {
     transform: translateY(-3px) scale(1.04);
     border-color: #9472d6;
+}
+
+
+/* =========================
+   RATING
+========================= */
+
+.rating-section {
+    text-align: center;
+}
+
+.rating-box {
+    max-width: 500px;
+    margin: auto;
+    padding: 35px 25px;
+    background: #141425;
+    border: 1px solid #292941;
+    border-radius: 18px;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.star {
+    border: none;
+    background: transparent;
+    color: #4a4a60;
+    font-size: 42px;
+    cursor: pointer;
+    transition: 0.2s;
+    padding: 3px;
+}
+
+.star:hover,
+.star.active {
+    color: #f4c542;
+    transform: scale(1.12);
+}
+
+#ratingMessage {
+    margin-top: 18px;
+    color: #9999b0;
+    font-size: 15px;
 }
 
 
@@ -353,7 +401,7 @@ footer {
     }
 
     nav {
-        gap: 18px;
+        gap: 15px;
     }
 
     nav a {
@@ -382,7 +430,8 @@ footer {
     }
 
     .styles-section,
-    .symbols-section {
+    .symbols-section,
+    .rating-section {
         padding: 55px 15px;
     }
 
@@ -415,6 +464,10 @@ footer {
     .symbols-box span {
         min-height: 58px;
         font-size: 24px;
+    }
+
+    .star {
+        font-size: 34px;
     }
 
     .footer-logo .logo-text {
