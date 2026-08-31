@@ -13,6 +13,7 @@ body {
     background: #0b0b16;
     color: white;
     min-height: 100vh;
+    overflow-x: hidden;
 }
 
 
@@ -242,6 +243,7 @@ h2 {
     font-size: 23px;
     line-height: 1.5;
     word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 .copy-btn {
@@ -377,104 +379,271 @@ footer {
 
 
 /* =========================
-   MOBILE
+   TABLET
 ========================= */
 
-@media (max-width: 700px) {
-
-    header {
-        padding: 24px 15px;
-    }
-
-    .logo,
-    .footer-logo {
-        gap: 9px;
-    }
-
-    .logo-text {
-        font-size: 31px;
-        letter-spacing: 4px;
-    }
-
-    .logo-line {
-        width: 40px;
-    }
-
-    nav {
-        gap: 15px;
-    }
-
-    nav a {
-        font-size: 13px;
-    }
+@media (max-width: 900px) {
 
     .hero {
-        padding: 65px 18px 55px;
+        padding: 70px 20px;
     }
 
     h1 {
-        font-size: 40px;
-    }
-
-    .description {
-        font-size: 16px;
-    }
-
-    .generator-box {
-        flex-direction: column;
-        padding: 7px;
-    }
-
-    #generateBtn {
-        width: 100%;
+        font-size: 48px;
     }
 
     .styles-section,
     .symbols-section,
     .rating-section {
-        padding: 55px 15px;
+        padding: 60px 20px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        font-size: 14px;
+    }
+
+    /* HEADER */
+
+    header {
+        padding: 20px 14px;
+    }
+
+    .logo,
+    .footer-logo {
+        gap: 7px;
+    }
+
+    .logo-text {
+        font-size: 29px;
+        letter-spacing: 3px;
+    }
+
+    .logo-line {
+        width: 25px;
+    }
+
+
+    /* NAV */
+
+    nav {
+        margin-top: 18px;
+        gap: 10px 17px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+
+    /* HERO */
+
+    .hero {
+        padding: 55px 15px 45px;
+    }
+
+    .small-title {
+        font-size: 10px;
+        letter-spacing: 3px;
+        margin-bottom: 16px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .description {
+        margin: 18px auto;
+        font-size: 15px;
+        line-height: 1.55;
+    }
+
+
+    /* GENERATOR */
+
+    .generator-box {
+        width: 100%;
+        margin-top: 28px;
+        padding: 7px;
+        flex-direction: column;
+        gap: 8px;
+        border-radius: 15px;
+    }
+
+    #textInput {
+        width: 100%;
+        padding: 16px;
+        font-size: 16px;
+    }
+
+    #generateBtn {
+        width: 100%;
+        padding: 16px;
+        font-size: 15px;
+    }
+
+
+    /* SECTIONS */
+
+    .styles-section,
+    .symbols-section,
+    .rating-section {
+        width: 100%;
+        padding: 45px 14px;
     }
 
     .section-heading {
-        gap: 9px;
+        gap: 8px;
     }
 
     .heading-line {
-        width: 30px;
+        width: 25px;
     }
 
     h2 {
-        font-size: 27px;
+        font-size: 25px;
+    }
+
+    .section-description {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 25px;
+    }
+
+
+    /* RESULT CARDS */
+
+    #results {
+        gap: 10px;
     }
 
     .result-card {
+        width: 100%;
+        padding: 15px;
+        gap: 12px;
         align-items: stretch;
         flex-direction: column;
+        border-radius: 13px;
+    }
+
+    .result-card small {
+        font-size: 9px;
+    }
+
+    .result-text {
+        font-size: 21px;
+        line-height: 1.5;
+        margin-top: 7px;
     }
 
     .copy-btn {
         width: 100%;
+        padding: 12px;
+        font-size: 13px;
     }
+
+
+    /* SYMBOLS */
 
     .symbols-box {
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        gap: 7px;
     }
 
     .symbols-box span {
-        min-height: 58px;
-        font-size: 24px;
+        min-height: 55px;
+        font-size: 23px;
+        border-radius: 10px;
+    }
+
+
+    /* RATING */
+
+    .rating-box {
+        width: 100%;
+        padding: 28px 15px;
+        border-radius: 15px;
+    }
+
+    .stars {
+        gap: 4px;
     }
 
     .star {
         font-size: 34px;
+        padding: 2px;
+    }
+
+    #ratingMessage {
+        font-size: 13px;
+    }
+
+
+    /* FOOTER */
+
+    footer {
+        padding: 45px 15px;
     }
 
     .footer-logo .logo-text {
-        font-size: 24px;
+        font-size: 23px;
+        letter-spacing: 3px;
     }
 
     .footer-logo .logo-line {
-        width: 30px;
+        width: 25px;
+    }
+
+    .creator {
+        font-size: 13px;
+    }
+
+    .copyright {
+        font-size: 11px;
+    }
+}
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
+
+@media (max-width: 380px) {
+
+    .logo-text {
+        font-size: 25px;
+    }
+
+    h1 {
+        font-size: 33px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .symbols-box {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .symbols-box span {
+        min-height: 50px;
+        font-size: 21px;
+    }
+
+    .result-text {
+        font-size: 19px;
+    }
+
+    .star {
+        font-size: 31px;
     }
 }
