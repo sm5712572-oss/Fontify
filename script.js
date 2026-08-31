@@ -1,264 +1,397 @@
-// ===============================
-// FONTIFY — 93 UNIQUE TEXT STYLES
-// ===============================
+const SUPABASE_URL = "https://fvsmxekoyvaxhxwgdupc.supabase.co";
+const SUPABASE_KEY = "sb_publishable_JDvUEUvfWKErFP1SN8B5GA_ctfBZHR1";
 
-const input = document.getElementById("textInput");
-const output = document.getElementById("fontResults");
+const textInput = document.getElementById("textInput");
+const generateBtn = document.getElementById("generateBtn");
+const results = document.getElementById("results");
 
-// Unicode alphabet maps
-const normal = "abcdefghijklmnopqrstuvwxyz";
-const bold = "𝐚𝐛𝐜𝐝𝐞𝐟𝐠𝐡𝐢𝐣𝐤𝐥𝐦𝐧𝐨𝐩𝐪𝐫𝐬𝐭𝐮𝐯𝐰𝐱𝐲𝐳";
-const italic = "𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖𝑗𝑘𝑙𝑚𝑛𝑜𝑝𝑞𝑟𝑠𝑡𝑢𝑣𝑤𝑥𝑦𝑧";
-const boldItalic = "𝒂𝒃𝒄𝒅𝒆𝒇𝒈𝒉𝒊𝒋𝒌𝒍𝒎𝒏𝒐𝒑𝒒𝒓𝒔𝒕𝒖𝒗𝒘𝒙𝒚𝒛";
-const script = "𝒶𝒷𝒸𝒹ℯ𝒻ℊ𝒽𝒾𝒿𝓀𝓁𝓂𝓃ℴ𝓅𝓆𝓇𝓈𝓉𝓊𝓋𝓌𝓍𝓎𝓏";
-const boldScript = "𝓪𝓫𝓬𝓭𝓮𝓯𝓰𝓱𝓲𝓳𝓴𝓵𝓶𝓷𝓸𝓹𝓺𝓻𝓼𝓽𝓾𝓿𝔀𝔁𝔂𝔃";
-const gothic = "𝔞𝔟𝔠𝔡𝔢𝔣𝔤𝔥𝔦𝔧𝔨𝔩𝔪𝔫𝔬𝔭𝔮𝔯𝔰𝔱𝔲𝔳𝔴𝔵𝔶𝔷";
-const gothicBold = "𝖆𝖇𝖈𝖉𝖊𝖋𝖌𝖍𝖎𝖏𝖐𝖑𝖒𝖓𝖔𝖕𝖖𝖗𝖘𝖙𝖚𝖛𝖜𝖝𝖞𝖟";
-const double = "𝕒𝕓𝕔𝕕𝕖𝕗𝕘𝕙𝕚𝕛𝕜𝕝𝕞𝕟𝕠𝕡𝕢𝕣𝕤𝕥𝕦𝕧𝕨𝕩𝕪𝕫";
-const mono = "𝚊𝚋𝚌𝚍𝚎𝚏𝚐𝚑𝚒𝚓𝚔𝚕𝚖𝚗𝚘𝚙𝚚𝚛𝚜𝚝𝚞𝚟𝚠𝚡𝚢𝚣";
-const full = "ａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ";
-const circled = "ⓐⓑⓒⓓⓔⓕⓖⓗⓘⓙⓚⓛⓜⓝⓞⓟⓠⓡⓢⓣⓤⓥⓦⓧⓨⓩ";
-const squared = "🅰🅱🅲🅳🅴🅵🅶🅷🅸🅹🅺🅻🅼🅽🅾🅿🆀🆁🆂🆃🆄🆅🆆🆇🆈🆉";
+// =====================================================
+// BASIC UNICODE FONT MAPS
+// =====================================================
 
-const smallCaps = {
-  a:"ᴀ",b:"ʙ",c:"ᴄ",d:"ᴅ",e:"ᴇ",f:"ғ",g:"ɢ",h:"ʜ",
-  i:"ɪ",j:"ᴊ",k:"ᴋ",l:"ʟ",m:"ᴍ",n:"ɴ",o:"ᴏ",p:"ᴘ",
-  q:"ǫ",r:"ʀ",s:"s",t:"ᴛ",u:"ᴜ",v:"ᴠ",w:"ᴡ",x:"x",
-  y:"ʏ",z:"ᴢ"
-};
+const maps = {
 
-const upsideDown = {
-  a:"ɐ",b:"q",c:"ɔ",d:"p",e:"ǝ",f:"ɟ",g:"ƃ",h:"ɥ",
-  i:"ᴉ",j:"ɾ",k:"ʞ",l:"l",m:"ɯ",n:"u",o:"o",p:"d",
-  q:"b",r:"ɹ",s:"s",t:"ʇ",u:"n",v:"ʌ",w:"ʍ",x:"x",
-  y:"ʎ",z:"z"
-};
+    bold: {
+        a:"𝐚",b:"𝐛",c:"𝐜",d:"𝐝",e:"𝐞",f:"𝐟",g:"𝐠",h:"𝐡",i:"𝐢",
+        j:"𝐣",k:"𝐤",l:"𝐥",m:"𝐦",n:"𝐧",o:"𝐨",p:"𝐩",q:"𝐪",r:"𝐫",
+        s:"𝐬",t:"𝐭",u:"𝐮",v:"𝐯",w:"𝐰",x:"𝐱",y:"𝐲",z:"𝐳"
+    },
 
-function mapText(text, chars) {
-  return [...text].map(char => {
-    const lower = char.toLowerCase();
-    const index = normal.indexOf(lower);
+    italic: {
+        a:"𝑎",b:"𝑏",c:"𝑐",d:"𝑑",e:"𝑒",f:"𝑓",g:"𝑔",h:"ℎ",i:"𝑖",
+        j:"𝑗",k:"𝑘",l:"𝑙",m:"𝑚",n:"𝑛",o:"𝑜",p:"𝑝",q:"𝑞",r:"𝑟",
+        s:"𝑠",t:"𝑡",u:"𝑢",v:"𝑣",w:"𝑤",x:"𝑥",y:"𝑦",z:"𝑧"
+    },
 
-    if (index === -1) return char;
+    boldItalic: {
+        a:"𝒂",b:"𝒃",c:"𝒄",d:"𝒅",e:"𝒆",f:"𝒇",g:"𝒈",h:"𝒉",i:"𝒊",
+        j:"𝒋",k:"𝒌",l:"𝒍",m:"𝒎",n:"𝒏",o:"𝒐",p:"𝒑",q:"𝒒",r:"𝒓",
+        s:"𝒔",t:"𝒕",u:"𝒖",v:"𝒗",w:"𝒘",x:"𝒙",y:"𝒚",z:"𝒛"
+    },
 
-    let result = chars[index];
+    double: {
+        a:"𝕒",b:"𝕓",c:"𝕔",d:"𝕕",e:"𝕖",f:"𝕗",g:"𝕘",h:"𝕙",i:"𝕚",
+        j:"𝕛",k:"𝕜",l:"𝕝",m:"𝕞",n:"𝕟",o:"𝕠",p:"𝕡",q:"𝕢",r:"𝕣",
+        s:"𝕤",t:"𝕥",u:"𝕦",v:"𝕧",w:"𝕨",x:"𝕩",y:"𝕪",z:"𝕫"
+    },
 
-    if (char === char.toUpperCase() && result) {
-      return result;
+    mono: {
+        a:"𝚊",b:"𝚋",c:"𝚌",d:"𝚍",e:"𝚎",f:"𝚏",g:"𝚐",h:"𝚑",i:"𝚒",
+        j:"𝚓",k:"𝚔",l:"𝚕",m:"𝚖",n:"𝚗",o:"𝚘",p:"𝚙",q:"𝚚",r:"𝚛",
+        s:"𝚜",t:"𝚝",u:"𝚞",v:"𝚟",w:"𝚠",x:"𝚡",y:"𝚢",z:"𝚣"
+    },
+
+    fraktur: {
+        a:"𝔞",b:"𝔟",c:"𝔠",d:"𝔡",e:"𝔢",f:"𝔣",g:"𝔤",h:"𝔥",i:"𝔦",
+        j:"𝔧",k:"𝔨",l:"𝔩",m:"𝔪",n:"𝔫",o:"𝔬",p:"𝔭",q:"𝔮",r:"𝔯",
+        s:"𝔰",t:"𝔱",u:"𝔲",v:"𝔳",w:"𝔴",x:"𝔵",y:"𝔶",z:"𝔷"
+    },
+
+    frakturBold: {
+        a:"𝖆",b:"𝖇",c:"𝖈",d:"𝖉",e:"𝖊",f:"𝖋",g:"𝖌",h:"𝖍",i:"𝖎",
+        j:"𝖏",k:"𝖐",l:"𝖑",m:"𝖒",n:"𝖓",o:"𝖔",p:"𝖕",q:"𝖖",r:"𝖗",
+        s:"𝖘",t:"𝖙",u:"𝖚",v:"𝖛",w:"𝖜",x:"𝖝",y:"𝖞",z:"𝖟"
+    },
+
+    script: {
+        a:"𝒶",b:"𝒷",c:"𝒸",d:"𝒹",e:"ℯ",f:"𝒻",g:"ℊ",h:"𝒽",i:"𝒾",
+        j:"𝒿",k:"𝓀",l:"𝓁",m:"𝓂",n:"𝓃",o:"ℴ",p:"𝓅",q:"𝓆",r:"𝓇",
+        s:"𝓈",t:"𝓉",u:"𝓊",v:"𝓋",w:"𝓌",x:"𝓍",y:"𝓎",z:"𝓏"
+    },
+
+    scriptBold: {
+        a:"𝓪",b:"𝓫",c:"𝓬",d:"𝓭",e:"𝓮",f:"𝓯",g:"𝓰",h:"𝓱",i:"𝓲",
+        j:"𝓳",k:"𝓴",l:"𝓵",m:"𝓶",n:"𝓷",o:"𝓸",p:"𝓹",q:"𝓺",r:"𝓻",
+        s:"𝓼",t:"𝓽",u:"𝓾",v:"𝓿",w:"𝔀",x:"𝔁",y:"𝔂",z:"𝔃"
+    },
+
+    circled: {
+        a:"ⓐ",b:"ⓑ",c:"ⓒ",d:"ⓓ",e:"ⓔ",f:"ⓕ",g:"ⓖ",h:"ⓗ",i:"ⓘ",
+        j:"ⓙ",k:"ⓚ",l:"ⓛ",m:"ⓜ",n:"ⓝ",o:"ⓞ",p:"ⓟ",q:"ⓠ",r:"ⓡ",
+        s:"ⓢ",t:"ⓣ",u:"ⓤ",v:"ⓥ",w:"ⓦ",x:"ⓧ",y:"ⓨ",z:"ⓩ"
+    },
+
+    full: {
+        a:"ａ",b:"ｂ",c:"ｃ",d:"ｄ",e:"ｅ",f:"ｆ",g:"ｇ",h:"ｈ",i:"ｉ",
+        j:"ｊ",k:"ｋ",l:"ｌ",m:"ｍ",n:"ｎ",o:"ｏ",p:"ｐ",q:"ｑ",r:"ｒ",
+        s:"ｓ",t:"ｔ",u:"ｕ",v:"ｖ",w:"ｗ",x:"ｘ",y:"ｙ",z:"ｚ"
+    },
+
+    small: {
+        a:"ᴀ",b:"ʙ",c:"ᴄ",d:"ᴅ",e:"ᴇ",f:"ꜰ",g:"ɢ",h:"ʜ",i:"ɪ",
+        j:"ᴊ",k:"ᴋ",l:"ʟ",m:"ᴍ",n:"ɴ",o:"ᴏ",p:"ᴘ",q:"ǫ",r:"ʀ",
+        s:"s",t:"ᴛ",u:"ᴜ",v:"ᴠ",w:"ᴡ",x:"x",y:"ʏ",z:"ᴢ"
+    },
+
+    upside: {
+        a:"ɐ",b:"q",c:"ɔ",d:"p",e:"ǝ",f:"ɟ",g:"ƃ",h:"ɥ",i:"ᴉ",
+        j:"ɾ",k:"ʞ",l:"ן",m:"ɯ",n:"u",o:"o",p:"d",q:"b",r:"ɹ",
+        s:"s",t:"ʇ",u:"n",v:"ʌ",w:"ʍ",x:"x",y:"ʎ",z:"z"
+    },
+
+    greek: {
+        a:"α",b:"в",c:"¢",d:"∂",e:"є",f:"ƒ",g:"g",h:"н",i:"ι",
+        j:"נ",k:"к",l:"ℓ",m:"м",n:"η",o:"σ",p:"ρ",q:"q",r:"я",
+        s:"ѕ",t:"т",u:"υ",v:"ν",w:"ω",x:"χ",y:"у",z:"z"
+    },
+
+    bubble: {
+        a:"🅐",b:"🅑",c:"🅒",d:"🅓",e:"🅔",f:"🅕",g:"🅖",h:"🅗",i:"🅘",
+        j:"🅙",k:"🅚",l:"🅛",m:"🅜",n:"🅝",o:"🅞",p:"🅟",q:"🅠",r:"🅡",
+        s:"🅢",t:"🅣",u:"🅤",v:"🅥",w:"🅦",x:"🅧",y:"🅨",z:"🅩"
     }
+};
 
-    return result || char;
-  }).join("");
+function convert(text, map) {
+    return [...text].map(char => {
+        return map[char.toLowerCase()] || char;
+    }).join("");
 }
 
-function small(text) {
-  return [...text].map(c => smallCaps[c.toLowerCase()] || c).join("");
+function marks(text, mark) {
+    return [...text].map(c => c + mark).join("");
 }
 
-function upside(text) {
-  return [...text]
-    .map(c => upsideDown[c.toLowerCase()] || c)
-    .reverse()
-    .join("");
-}
+// =====================================================
+// 93 UNIQUE STYLES
+// =====================================================
 
-function surround(text, left, right = left) {
-  return left + text + right;
-}
+const styles = [
 
-function decorate(text, type) {
-  switch(type) {
+["Bold", t => convert(t,maps.bold)],
+["Italic", t => convert(t,maps.italic)],
+["Bold Italic", t => convert(t,maps.boldItalic)],
+["Double", t => convert(t,maps.double)],
+["Monospace", t => convert(t,maps.mono)],
+["Fraktur", t => convert(t,maps.fraktur)],
+["Fraktur Bold", t => convert(t,maps.frakturBold)],
+["Script", t => convert(t,maps.script)],
+["Script Bold", t => convert(t,maps.scriptBold)],
+["Circled", t => convert(t,maps.circled)],
+["Full Width", t => convert(t,maps.full)],
+["Small Caps", t => convert(t,maps.small)],
+["Upside Down", t => convert(t,maps.upside)],
+["Greek Style", t => convert(t,maps.greek)],
+["Bubble", t => convert(t,maps.bubble)],
 
-    case 1: return mapText(text, bold);
-    case 2: return mapText(text, italic);
-    case 3: return mapText(text, boldItalic);
-    case 4: return mapText(text, script);
-    case 5: return mapText(text, boldScript);
-    case 6: return mapText(text, gothic);
-    case 7: return mapText(text, gothicBold);
-    case 8: return mapText(text, double);
-    case 9: return mapText(text, mono);
-    case 10: return mapText(text, full);
-    case 11: return mapText(text, circled);
-    case 12: return mapText(text, squared);
-    case 13: return small(text);
-    case 14: return upside(text);
+["♡ Heart Bold", t => "♡ " + convert(t,maps.bold) + " ♡"],
+["♥ Heart Script", t => "♥ " + convert(t,maps.script) + " ♥"],
+["ღ Heart Italic", t => "ღ " + convert(t,maps.italic) + " ღ"],
+["୨♡୧ Heart", t => "୨♡୧ " + convert(t,maps.script) + " ୨♡୧"],
+["💗 Cute Heart", t => "💗 " + convert(t,maps.bold) + " 💗"],
 
-    case 15: return `【${text}】`;
-    case 16: return `『${text}』`;
-    case 17: return `「${text}」`;
-    case 18: return `《${text}》`;
-    case 19: return `〈${text}〉`;
-    case 20: return `〔${text}〕`;
-    case 21: return `〖${text}〗`;
-    case 22: return `〘${text}〙`;
-    case 23: return `〚${text}〛`;
-    case 24: return `⟦${text}⟧`;
-    case 25: return `⟨${text}⟩`;
+["★ Star Bold", t => "★ " + convert(t,maps.bold) + " ★"],
+["✦ Star Script", t => "✦ " + convert(t,maps.script) + " ✦"],
+["✧ Star Italic", t => "✧ " + convert(t,maps.italic) + " ✧"],
+["☆ Star Double", t => "☆ " + convert(t,maps.double) + " ☆"],
+["✩ Sparkle", t => "✩ " + convert(t,maps.script) + " ✩"],
 
-    case 26: return `≋${[...text].join("≋")}≋`;
-    case 27: return `░${[...text].join("░")}░`;
-    case 28: return `▒${[...text].join("▒")}▒`;
-    case 29: return `▓${[...text].join("▓")}▓`;
-    case 30: return `█${[...text].join("█")}█`;
+["♛ Royal Bold", t => "♛ " + convert(t,maps.bold) + " ♛"],
+["♕ Royal Script", t => "♕ " + convert(t,maps.script) + " ♕"],
+["♚ Luxury", t => "♚ " + convert(t,maps.double) + " ♚"],
+["👑 Crown", t => "👑 " + convert(t,maps.bold) + " 👑"],
 
-    case 31: return [...text].map(c => c + "\u0336").join("");
-    case 32: return [...text].map(c => c + "\u0335").join("");
-    case 33: return [...text].map(c => c + "\u0334").join("");
-    case 34: return [...text].map(c => c + "\u0332").join("");
-    case 35: return [...text].map(c => c + "\u0333").join("");
-    case 36: return [...text].map(c => c + "\u0353").join("");
-    case 37: return [...text].map(c => c + "\u0354").join("");
-    case 38: return [...text].map(c => c + "\u0355").join("");
-    case 39: return [...text].map(c => c + "\u0356").join("");
-    case 40: return [...text].map(c => c + "\u0357").join("");
+["☾ Moon", t => "☾ " + convert(t,maps.italic) + " ☽"],
+["☀ Sun", t => "☀ " + convert(t,maps.bold) + " ☀"],
+["☁ Cloud", t => "☁ " + convert(t,maps.script) + " ☁"],
+["⚡ Lightning", t => "⚡ " + convert(t,maps.bold) + " ⚡"],
+["∞ Infinity", t => "∞ " + convert(t,maps.double) + " ∞"],
 
-    case 41: return `★ ${text} ★`;
-    case 42: return `☆ ${text} ☆`;
-    case 43: return `✦ ${text} ✦`;
-    case 44: return `✧ ${text} ✧`;
-    case 45: return `❖ ${text} ❖`;
-    case 46: return `✿ ${text} ✿`;
-    case 47: return `❀ ${text} ❀`;
-    case 48: return `♡ ${text} ♡`;
-    case 49: return `♥ ${text} ♥`;
-    case 50: return `ღ ${text} ღ`;
-    case 51: return `☾ ${text} ☽`;
-    case 52: return `☀ ${text} ☀`;
-    case 53: return `♛ ${text} ♛`;
-    case 54: return `♕ ${text} ♕`;
-    case 55: return `⚡ ${text} ⚡`;
+["❀ Flower", t => "❀ " + convert(t,maps.script) + " ❀"],
+["✿ Flower Bold", t => "✿ " + convert(t,maps.bold) + " ✿"],
+["❁ Flower Double", t => "❁ " + convert(t,maps.double) + " ❁"],
+["🌸 Blossom", t => "🌸 " + convert(t,maps.script) + " 🌸"],
 
-    case 56: return `•° ${text} °•`;
-    case 57: return `°• ${text} •°`;
-    case 58: return `~* ${text} *~`;
-    case 59: return `*･ﾟ ${text} ﾟ･*`;
-    case 60: return `｡･:* ${text} *:･｡`;
-    case 61: return `༺ ${text} ༻`;
-    case 62: return `༒ ${text} ༒`;
-    case 63: return `ஜ۩ ${text} ۩ஜ`;
-    case 64: return `꧁ ${text} ꧂`;
-    case 65: return `𓆩 ${text} 𓆪`;
+["◇ Diamond", t => "◇ " + convert(t,maps.double) + " ◇"],
+["◆ Diamond Bold", t => "◆ " + convert(t,maps.bold) + " ◆"],
+["♦ Diamond Script", t => "♦ " + convert(t,maps.script) + " ♦"],
+["♢ Diamond Italic", t => "♢ " + convert(t,maps.italic) + " ♢"],
 
-    case 66: return `🎀 ${text} 🎀`;
-    case 67: return `🌸 ${text} 🌸`;
-    case 68: return `🦋 ${text} 🦋`;
-    case 69: return `🌙 ${text} 🌙`;
-    case 70: return `✨ ${text} ✨`;
-    case 71: return `💎 ${text} 💎`;
-    case 72: return `🌷 ${text} 🌷`;
-    case 73: return `🍭 ${text} 🍭`;
-    case 74: return `🍫 ${text} 🍫`;
-    case 75: return `🩷 ${text} 🩷`;
+["『 Elegant", t => "『 " + convert(t,maps.script) + " 』"],
+["【 Square", t => "【 " + convert(t,maps.bold) + " 】"],
+["《 Classic", t => "《 " + convert(t,maps.double) + " 》"],
+["〈 Angle", t => "〈 " + convert(t,maps.italic) + " 〉"],
+["〔 Japanese", t => "〔 " + convert(t,maps.script) + " 〕"],
+["〖 Fancy", t => "〖 " + convert(t,maps.bold) + " 〗"],
+["〘 Soft Frame", t => "〘 " + convert(t,maps.italic) + " 〙"],
 
-    case 76: return `☞ ${text} ☜`;
-    case 77: return `☜ ${text} ☞`;
-    case 78: return `♬ ${text} ♪`;
-    case 79: return `♚ ${text} ♚`;
-    case 80: return `♤ ${text} ♤`;
-    case 81: return `♧ ${text} ♧`;
-    case 82: return `♦ ${text} ♦`;
-    case 83: return `♠ ${text} ♠`;
-    case 84: return `☯ ${text} ☯`;
-    case 85: return `☮ ${text} ☮`;
+["➜ Arrow", t => "➜ " + convert(t,maps.bold) + " ➜"],
+["➤ Arrow Bold", t => "➤ " + convert(t,maps.script) + " ➤"],
+["☞ Pointer", t => "☞ " + convert(t,maps.bold) + " ☜"],
+["➳ Elegant Arrow", t => "➳ " + convert(t,maps.italic) + " ➳"],
 
-    case 86: return `『★』${text}『★』`;
-    case 87: return `【☆】${text}【☆】`;
-    case 88: return `꧁༺ ${text} ༻꧂`;
-    case 89: return `✦༺ ${text} ༻✦`;
-    case 90: return `♡₊˚ ${text} ˚₊♡`;
-    case 91: return `୨୧ ${text} ୨୧`;
-    case 92: return `⋆｡°✩ ${text} ✩°｡⋆`;
-    case 93: return `•°¯°• ${text} •°¯°•`;
+["☯ Peace", t => "☯ " + convert(t,maps.italic) + " ☯"],
+["☮ Peace Sign", t => "☮ " + convert(t,maps.double) + " ☮"],
+["✌ Peaceful", t => "✌ " + convert(t,maps.script) + " ✌"],
 
-    default:
-      return text;
-  }
-}
+["♡━━ Heart Line", t => "♡━━ " + convert(t,maps.script) + " ━━♡"],
+["★━━ Star Line", t => "★━━ " + convert(t,maps.bold) + " ━━★"],
+["✦━━ Spark Line", t => "✦━━ " + convert(t,maps.italic) + " ━━✦"],
+["◆━━ Diamond Line", t => "◆━━ " + convert(t,maps.double) + " ━━◆"],
+["♛━━ Royal Line", t => "♛━━ " + convert(t,maps.bold) + " ━━♛"],
 
-// ===============================
-// 93 STYLE NAMES
-// ===============================
+["Underline", t => marks(t,"\u0332")],
+["Double Underline", t => marks(t,"\u0333")],
+["Strike", t => marks(t,"\u0336")],
+["Slash", t => marks(t,"\u0337")],
+["Cross", t => marks(t,"\u0338")],
+["Dot Above", t => marks(t,"\u0307")],
+["Dot Below", t => marks(t,"\u0323")],
+["Tilde", t => marks(t,"\u0330")],
+["Wave", t => marks(t,"\u0363")],
 
-const styleNames = [
-  "Bold","Italic","Bold Italic","Script","Bold Script",
-  "Gothic","Gothic Bold","Double Struck","Monospace","Fullwidth",
-  "Circled","Squared","Small Caps","Upside Down",
+["꧁ Royal Frame", t => "꧁༺ " + convert(t,maps.bold) + " ༻꧂"],
+["༺ Fancy Frame", t => "༺═ " + convert(t,maps.script) + " ═༻"],
+["༻ Mystic Frame", t => "༻✧ " + convert(t,maps.italic) + " ✧༺"],
+["ஜ۩۞۩ஜ Temple", t => "ஜ۩۞۩ஜ " + convert(t,maps.bold) + " ஜ۩۞۩ஜ"],
 
-  "Boxed","Fancy Brackets","Japanese Brackets","Double Angle",
-  "Angle Brackets","Tortoise Shell","Fancy Square","Double Brackets",
-  "Heavy Brackets","Math Brackets","Sharp Brackets",
+["🎀 Cute", t => "🎀 " + convert(t,maps.script) + " 🎀"],
+["🍬 Sweet", t => "🍬 " + convert(t,maps.script) + " 🍬"],
+["🌷 Floral", t => "🌷 " + convert(t,maps.italic) + " 🌷"],
+["🦋 Butterfly", t => "🦋 " + convert(t,maps.script) + " 🦋"],
+["✨ Magical", t => "✨ " + convert(t,maps.bold) + " ✨"],
+["🌙 Night", t => "🌙 " + convert(t,maps.italic) + " 🌙"],
+["💎 Diamond Luxury", t => "💎 " + convert(t,maps.double) + " 💎"],
+["🍭 Candy", t => "🍭 " + convert(t,maps.scriptBold) + " 🍭"],
 
-  "Wave","Light Block","Medium Block","Dark Block","Heavy Block",
-  "Strikethrough","Crossed","Tilde","Underline","Double Underline",
-  "Top Line","Top Bar","Wave Top","Wave Bottom","Double Wave",
+["•°• Aesthetic", t => "•°• " + convert(t,maps.script) + " •°•"],
+["⋆｡°✩ Dreamy", t => "⋆｡°✩ " + convert(t,maps.italic) + " ✩°｡⋆"],
+["❈✩ Elegant", t => "❈✩ " + convert(t,maps.script) + " ✩❈"],
+["~*~ Classic", t => "~*~ " + convert(t,maps.bold) + " ~*~"],
+["-漫- Japanese", t => "-漫~ " + convert(t,maps.script) + " ~漫-"],
+["♬ Music", t => "♬ " + convert(t,maps.script) + " ♬"],
+["☕ Cozy", t => "☕ " + convert(t,maps.italic) + " ☕"],
+["🌌 Galaxy", t => "🌌 " + convert(t,maps.double) + " 🌌"],
 
-  "Star","Hollow Star","Four Point","Sparkle","Diamond",
-  "Flower","Flower Star","Heart","Love","Cute Heart",
-  "Moon","Sun","Queen","Crown","Lightning",
-
-  "Classic","Reverse Classic","Retro","Aesthetic","Dreamy",
-  "Royal","Dark Royal","Ornamental","Mystic","Elegant",
-
-  "Bow","Flower","Butterfly","Moonlight","Sparkle",
-  "Diamond","Tulip","Candy","Chocolate","Pink Love",
-
-  "Pointing","Reverse Pointing","Music","Chess Crown","Spade",
-  "Club","Diamond Suit","Spade Suit","Yin Yang","Peace",
-
-  "Star Frame","Star Box","Royal Frame","Diamond Frame",
-  "Cute Heart Frame","Pretty Frame","Dream Frame","Classic Frame"
+["【﻿Full】", t => "【﻿" + convert(t,maps.full) + "】"],
+["[̲̅Underbar]", t => [...t].map(c => "[̲̅" + c + "]").join("")],
+["m⃞ Boxed", t => [...t].map(c => c + "\u20de").join("")],
+["m⃣ Enclosed", t => [...t].map(c => c + "\u20e3").join("")],
+["m♥a♥ Style", t => [...t].join("♥")],
+["Space Style", t => [...t].join("   ")],
+["Dot Style", t => [...t].join(" • ")],
+["Star Space", t => [...t].join(" ★ ")],
+["Heart Space", t => [...t].join(" ♡ ")]
 ];
 
-// ===============================
-// GENERATE RESULTS
-// ===============================
+// =====================================================
+// CREATE STYLES
+// =====================================================
 
-function generateFonts() {
+function generateStyles() {
 
-  const text = input.value.trim();
+    const text = textInput.value.trim();
 
-  if (!text) {
-    output.innerHTML = "";
-    return;
-  }
+    if (!text) {
+        results.innerHTML = `
+            <div class="empty-message">
+                Please enter your name or text first.
+            </div>
+        `;
+        return;
+    }
 
-  output.innerHTML = "";
+    results.innerHTML = "";
 
-  for (let i = 1; i <= 93; i++) {
+    styles.forEach((style, index) => {
 
-    const card = document.createElement("div");
-    card.className = "font-card";
+        let styledText;
 
-    const name = document.createElement("div");
-    name.className = "font-name";
-    name.textContent = `${i}. ${styleNames[i - 1]}`;
+        try {
+            styledText = style[1](text);
+        } catch (error) {
+            styledText = text;
+            console.error("Style error:", style[0], error);
+        }
 
-    const result = document.createElement("div");
-    result.className = "font-result";
-    result.textContent = decorate(text, i);
+        const card = document.createElement("div");
+        card.className = "result-card";
 
-    const copyBtn = document.createElement("button");
-    copyBtn.className = "copy-btn";
-    copyBtn.textContent = "Copy";
+        card.innerHTML = `
+            <div>
+                <small>${style[0]} • Style ${index + 1}</small>
+                <div class="result-text"></div>
+            </div>
 
-    copyBtn.onclick = async () => {
-      await navigator.clipboard.writeText(result.textContent);
-      copyBtn.textContent = "Copied ✓";
+            <button class="copy-btn">COPY</button>
+        `;
 
-      setTimeout(() => {
-        copyBtn.textContent = "Copy";
-      }, 1200);
-    };
+        card.querySelector(".result-text").textContent = styledText;
 
-    card.appendChild(name);
-    card.appendChild(result);
-    card.appendChild(copyBtn);
+        const copyButton = card.querySelector(".copy-btn");
 
-    output.appendChild(card);
-  }
+        copyButton.addEventListener("click", async () => {
+
+            try {
+
+                await navigator.clipboard.writeText(styledText);
+
+                copyButton.textContent = "COPIED ✓";
+
+                setTimeout(() => {
+                    copyButton.textContent = "COPY";
+                }, 1500);
+
+            } catch (error) {
+
+                copyButton.textContent = "COPY FAILED";
+
+            }
+
+        });
+
+        results.appendChild(card);
+    });
 }
 
-input.addEventListener("input", generateFonts);
+// =====================================================
+// BUTTON
+// =====================================================
 
-generateFonts();
+if (generateBtn) {
+    generateBtn.addEventListener("click", generateStyles);
+}
+
+// =====================================================
+// ENTER KEY
+// =====================================================
+
+if (textInput) {
+    textInput.addEventListener("keydown", event => {
+
+        if (event.key === "Enter") {
+            generateStyles();
+        }
+
+    });
+}
+
+// =====================================================
+// RATING
+// =====================================================
+
+const stars = document.querySelectorAll(".star");
+const ratingMessage = document.getElementById("ratingMessage");
+
+stars.forEach(star => {
+
+    star.addEventListener("click", async () => {
+
+        const rating = Number(star.dataset.rating);
+
+        stars.forEach(item => {
+
+            item.classList.toggle(
+                "active",
+                Number(item.dataset.rating) <= rating
+            );
+
+        });
+
+        if (ratingMessage) {
+            ratingMessage.textContent = "Saving your rating...";
+        }
+
+        try {
+
+            const response = await fetch(
+                `${SUPABASE_URL}/rest/v1/ratings`,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "apikey": SUPABASE_KEY,
+                        "Authorization": `Bearer ${SUPABASE_KEY}`,
+                        "Content-Type": "application/json",
+                        "Prefer": "return=minimal"
+                    },
+
+                    body: JSON.stringify({
+                        rating: rating
+                    })
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Rating could not be saved");
+            }
+
+            if (ratingMessage) {
+                ratingMessage.textContent =
+                    `Thanks for rating Fontify ⭐ ${rating}/5`;
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            if (ratingMessage) {
+                ratingMessage.textContent =
+                    "Couldn't save rating. Please try again.";
+            }
+
+        }
+
+    });
+
+});
