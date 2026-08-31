@@ -4,6 +4,7 @@ const SUPABASE_KEY = "sb_publishable_JDvUEUvfWKErFP1SN8B5GA_ctfBZHR1";
 const textInput = document.getElementById("textInput");
 const generateBtn = document.getElementById("generateBtn");
 const results = document.getElementById("results");
+const styleSearch = document.getElementById("styleSearch");
 
 
 // =====================================================
@@ -88,9 +89,11 @@ const fonts = {
 
 
 function convert(text, map) {
+
     return [...text]
         .map(char => map[char.toLowerCase()] || char)
         .join("");
+
 }
 
 
@@ -188,6 +191,8 @@ function generateStyles() {
 
         card.className = "result-card";
 
+        card.dataset.styleName = style[0].toLowerCase();
+
         card.innerHTML = `
             <div>
                 <small>${style[0]} • Style ${index + 1}</small>
@@ -224,6 +229,69 @@ function generateStyles() {
         results.appendChild(card);
 
     });
+
+    applyStyleSearch();
+
+}
+
+
+// =====================================================
+// SEARCH STYLES
+// =====================================================
+
+function applyStyleSearch() {
+
+    const searchText = styleSearch
+        ? styleSearch.value.trim().toLowerCase()
+        : "";
+
+    const cards = results.querySelectorAll(".result-card");
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+
+        const styleName = card.dataset.styleName;
+
+        if (!searchText || styleName.includes(searchText)) {
+
+            card.style.display = "";
+
+            visibleCount++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    const oldMessage = results.querySelector(".search-empty");
+
+    if (oldMessage) {
+        oldMessage.remove();
+    }
+
+    if (searchText && visibleCount === 0) {
+
+        const message = document.createElement("div");
+
+        message.className = "empty-message search-empty";
+
+        message.textContent = `No style found for "${searchText}".`;
+
+        results.appendChild(message);
+
+    }
+
+}
+
+
+// Search while typing
+if (styleSearch) {
+
+    styleSearch.addEventListener("input", applyStyleSearch);
 
 }
 
