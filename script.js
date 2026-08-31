@@ -1,5 +1,5 @@
 const SUPABASE_URL = "https://fvsmxekoyvaxhxwgdupc.supabase.co";
-const SUPABASE_KEY = "YOUR_PUBLISHABLE_KEY";
+const SUPABASE_KEY = "sb_publishable_JDvUEUvfWKErFP1SN8B5GA_ctfBZHR1";
 
 const textInput = document.getElementById("textInput");
 const generateBtn = document.getElementById("generateBtn");
