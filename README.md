@@ -29,3 +29,7 @@ https://this-is-meee.github.io/Fontify/
 **Shaikh Madiha Abdul Hameed**
 
 © 2026 Fontify
+
+## 🖥️ Preview
+
+![Fontify Preview](./fontify-preview.png)
